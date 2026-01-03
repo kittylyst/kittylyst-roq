@@ -21,19 +21,14 @@
 
     {#bundle /}
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    {#include partials/header.html /}
+<body>
+    {#include partials/navbar.html /}
 
-    <main class="site-main">
+    <main class="bg-gray-100 flex items-center justify-center min-h-screen">
         {#insert /}
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p>Powered by <a href="https://iamroq.com" target="_blank">Roq 🗿</a>!</p>
-            <p>&copy; {now.format('Y')} {site.title}. All rights reserved.</p>
-        </div>
-    </footer>
+    {#include partials/footer.html /}   
 
 </body>
 </html>

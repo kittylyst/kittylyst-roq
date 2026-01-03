@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{site.data.lang ?: 'en'}" dir="{site.data.direction ?: 'ltr'}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#seo page site /}
+    {#favicon site/}
+
+    <!-- Theme initialization script (prevent flash) -->
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        if(theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {#bundle /}
+</head>
+<body>
+    {#include partials/navbar.html /}
+
+    <main class="bg-white flex items-center justify-center min-h-screen">
+        {#insert /}
+    </main>
+
+    {#include partials/footer.html /}
+
+</body>
+</html>
+
