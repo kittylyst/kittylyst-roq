@@ -1,7 +1,7 @@
 ---
-layout: front
+layout: default
 title: Ben Evans (kittylyst)
-description: A simple static site showcasing my work.
+description: A simple static site showcasing my work & projects
 image: iamroq.png
 social-facebook:
 social-github: quarkiverse/quarkus-roq
@@ -9,18 +9,8 @@ social-linkedin: kittylyst
 ---
 
 <!-- Introduction Section -->
-<div class="flex justify-center">
-    <div><h1>{site.title}</h1></div>
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
-        <a href="#"
-           class="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
-            <img src="images/main/another_place.jpg" loading="lazy" alt="Another Place" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-            <div
-                    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
-            </div>
-
-            <span class="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">Another Place</span>
-        </a>
-    </div>
+<div class="rounded-lg shadow-lg">
+    <h1 class="text-base font-normal text-xl text-black list-none">Ben Evans - Architect, Author, Educator, Speaker</h1>
+    <h2 class="text-base font-normal text-black list-none">{page.description}</h2>
+    <img src="images/main/another-place.jpg" loading="lazy" alt="Another Place" class="h-full w-full object-cover object-center transition duration-200" />
 </div>
