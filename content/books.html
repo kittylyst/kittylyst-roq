@@ -1,0 +1,18 @@
+---
+layout: default
+title: Books Ben's written
+description: |
+  Books that Ben has written
+---
+
+<div class="grid grid-cols-3 grid-rows-4 gap-4">
+    {#for item in site.collections.books}
+    <div><a href="{item.data.url}" target="_blank"><img src="{item.data.image}"/></a></div>
+    <div>
+        <div>{item.title}</div>
+        <div>{item.data.isbn}</div>
+    </div>
+    <div>{item.data.description}</div>
+    {/for}
+</div>
+
