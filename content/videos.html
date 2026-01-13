@@ -1,0 +1,28 @@
+---
+layout: default
+title: Videos of Ben
+description: |
+  Videos of Ben
+---
+
+<div class="grid grid-cols-3 gap-4">
+    <!-- Control Panel -->
+    <div class="bg-white col-span-2 p-6 mb-6"></div>
+    <div class="bg-white p-6 mb-6">
+        <div class="flex flex-wrap gap-2">
+            <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+                Show All
+            </button>
+        </div>
+    </div>
+
+    {#for item in site.collections.videos.sortBy("title", false).orEmpty}
+    <div><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
+    <div>
+        <div>{item.title}</div>
+        <div>{item.data.type}</div>
+    </div>
+    <div>{item.data.headline}</div>
+    {/for}
+</div>
+

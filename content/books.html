@@ -5,10 +5,10 @@ description: |
   Books that Ben has written
 ---
 
-<div class="grid grid-cols-3 grid-rows-4 gap-4">
+<div class="grid grid-cols-3 gap-4">
     <!-- Control Panel -->
-    <div class="bg-white col-span-full rounded-lg shadow-md p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Controls</h2>
+    <div class="bg-white col-span-2 p-6 mb-6"></div>
+    <div class="bg-white p-6 mb-6">
         <div class="flex flex-wrap gap-2">
             <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                 Show All
@@ -17,12 +17,12 @@ description: |
     </div>
 
     {#for item in site.collections.books.sortBy("title", false)}
-    <div {#if item.data.hide??} class="hidden"{/if}><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
-    <div {#if item.data.hide??} class="hidden"{/if}>
+    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
+    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>
         <div>{item.title}</div>
         <div>{item.data.isbn}</div>
     </div>
-    <div {#if item.data.hide??} class="hidden"{/if}>{item.data.description}</div>
+    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>{item.data.description}</div>
     {/for}
 </div>
 
