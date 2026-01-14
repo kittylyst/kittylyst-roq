@@ -16,13 +16,16 @@ description: |
         </div>
     </div>
 
-    {#for item in site.collections.videos.sortBy("title", false).orEmpty}
+    {#for item in site.collections.videos.sortBy("pubdate", true).orEmpty}
     <div><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
     <div>
         <div>{item.title}</div>
         <div>{item.data.type}</div>
+        <div>{item.data.headline}</div>
     </div>
-    <div>{item.data.headline}</div>
+    <div>
+        {item.content}
+    </div>
     {/for}
 </div>
 
