@@ -80,13 +80,17 @@ description: |
 <script>
     const images = [
         {#for item in site.collections.videos.orEmpty}
+        {#if item.data.featured}
         "{item.data.image}",
+        {/if}
         {/for}
     ];
 
     const urls = [
         {#for item in site.collections.videos.orEmpty}
+        {#if item.data.featured}
         "{item.data.url}",
+        {/if}
         {/for}
     ];
 
