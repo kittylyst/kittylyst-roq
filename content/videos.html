@@ -234,16 +234,16 @@ description: |
         }
     }
 
-    // Auto-play (optional - uncomment to enable)
-    // let autoPlayInterval = setInterval(nextSlide, 5000);
-    //
-    // carouselTrack.addEventListener('mouseenter', () => {
-    //     clearInterval(autoPlayInterval);
-    // });
-    //
-    // carouselTrack.addEventListener('mouseleave', () => {
-    //     autoPlayInterval = setInterval(nextSlide, 5000);
-    // });
+    // Auto-play (optional - comment to disable)
+    let autoPlayInterval = setInterval(nextSlide, 5000);
+
+    carouselTrack.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+
+    carouselTrack.addEventListener('mouseleave', () => {
+        autoPlayInterval = setInterval(nextSlide, 5000);
+    });
 
     // Initialize on load
     window.addEventListener('load', () => {
