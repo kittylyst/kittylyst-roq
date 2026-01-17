@@ -1,5 +1,5 @@
 ---
-title: The Well-Grounded Java Developer (2nd Ed)
+title: The Well-Grounded Java Developer 2nd Ed
 layout: default
 isbn: 9781617298875
 image: images/books/wgjd2_cover.png

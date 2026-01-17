@@ -1,8 +1,8 @@
 ---
-title: Java in a Nutshell 7ed
+title: Java in a Nutshell 7th Ed
 layout: default
-isbn: 978-1-4920-3725-5
-image: images/books/nutshell7-cover.jpg
+isbn: 1492037255
+image: images/books/cover_nutshell7.png
 url: https://www.amazon.com/Java-Nutshell-Desktop-Quick-Reference/dp/1098131002
 hide: true
 description: |

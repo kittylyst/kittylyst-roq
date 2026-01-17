@@ -1,8 +1,8 @@
 ---
-title: Java in a Nutshell 8
+title: Java in a Nutshell 8th Ed
 layout: default
 isbn: 1098131002
-image: images/books/nutshell8-cover.jpg
+image: images/books/cover_nutshell8.png
 url: https://www.amazon.com/Java-Nutshell-Desktop-Quick-Reference/dp/1098131002
 hide: false
 description: |

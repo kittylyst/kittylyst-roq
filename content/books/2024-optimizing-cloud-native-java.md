@@ -1,5 +1,5 @@
 ---
-title: Optimizing Cloud Native Java (2nd Ed)
+title: Optimizing Cloud Native Java 2nd Ed
 layout: default
 isbn: 1098149343
 image: images/books/ocnj2_cover.png
