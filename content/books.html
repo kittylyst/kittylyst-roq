@@ -16,11 +16,13 @@ description: |
         </div>
     </div>
 
-    {#for item in site.collections.books.sortBy("title", false)}
+    {#for item in site.collections.books.sortBy("pubdate", true)}
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>
         <div>{item.title}</div>
         <div>{item.data.isbn}</div>
+        <div>&nbsp;</div>
+        <div>{item.data.publisher} ({item.data.pubdate})</div>
     </div>
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>{item.data.description}</div>
     {/for}
