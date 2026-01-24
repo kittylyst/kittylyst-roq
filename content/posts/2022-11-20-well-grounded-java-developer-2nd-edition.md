@@ -1,7 +1,7 @@
 ---
 title: The Well Grounded Java Developer 2nd Edition Has Been Published
 description: A big announcement today - the 2nd Edition of my very first book, "The Well-Grounded Java Developer" has been published.
-image: blogpostW.jpg
+image: images/posts/blogpostW.jpg
 layout: default
 pubdate: 2022-11-20
 tags: [books, java, announcement]

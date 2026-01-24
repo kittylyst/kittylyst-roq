@@ -1,7 +1,7 @@
 ---
 title: Java Reconsidered - A Response
 description: A response to a blog post about relearning Java, discussing Java's performance characteristics and design choices.
-image: blogpostW.jpg
+image: images/posts/blogpostW.jpg
 layout: default
 pubdate: 2022-12-28
 tags: [java, performance, opinion]
