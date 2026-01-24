@@ -8,5 +8,5 @@ publisher: O'Reilly
 url: https://www.amazon.com/Java-Nutshell-Desktop-Quick-Reference/dp/1098131002
 hide: false
 description: |
-  The eighth edition of Java in a Nutshell covers Java 17 LTS.
+  The eighth edition of the classic text Java in a Nutshell covers Java 17 LTS. It introduces Java programming for newcomers to the language who need a general overview and a firm foundation for a professional career  
 ---
