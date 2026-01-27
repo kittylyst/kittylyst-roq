@@ -2,7 +2,7 @@
 title: Advice For New Java Developers
 description: This post collects some of my thoughts about what skills a good Java developer needs. It's focused on developers who have just joined the Java community.
 image: images/posts/blogpost3.jpg
-layout: default
+layout: post
 pubdate: 2022-08-07
 tags: [java, career, advice]
 author: kittylyst

@@ -2,7 +2,7 @@
 title: Advice For Young Developers
 description: This post collects some of my thoughts about what skills a good entry-level developer needs, and the transition into being a professional software developer.
 image: images/posts/blogpost3.jpg
-layout: default
+layout: post
 pubdate: 2022-09-04
 tags: [career, advice, development]
 author: kittylyst

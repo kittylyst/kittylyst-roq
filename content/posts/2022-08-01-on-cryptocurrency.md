@@ -2,7 +2,7 @@
 title: On Cryptocurrency
 description: My observations of, and overall position regarding, cryptocurrency and related technologies.
 image: images/posts/blogpost2.jpg
-layout: default
+layout: post
 pubdate: 2022-08-01
 tags: [cryptocurrency, opinion]
 author: kittylyst

@@ -24,7 +24,7 @@ description: |
         <div>&nbsp;</div>
         <div>{item.data.publisher} ({item.data.pubdate})</div>
     </div>
-    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><p>{item.data.description}</p></div>
+    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><p>{item.content.raw}</p></div>
     {/for}
 </div>
 

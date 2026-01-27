@@ -16,8 +16,6 @@ asciidoc-attributes:
   </header>
 
   <div class="post-layout-wrapper">
-    {#include partials/toc /}
-
     <!-- Main Content Area -->
     <article class="post-content-area">
       <div class="article-content">
@@ -46,20 +44,7 @@ asciidoc-attributes:
         {/if}
       </div>
 
-      <footer>
-        <div>
-          {#if page.previous}
-          <a href="{page.previous.url}">
-            ← {page.previous.title}
-          </a>
-          {/if}
-          {#if page.next}
-          <a href="{page.next.url}">
-            {page.next.title} →
-          </a>
-          {/if}
-        </div>
-      </footer>
+
     </article>
   </div>
 </div>
