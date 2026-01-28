@@ -1,0 +1,25 @@
+---
+layout: booklist
+title: Books Ben's written
+description: |
+  Books that Ben has written
+---
+
+<div class="grid grid-cols-3 gap-4">
+    <!-- Control Panel -->
+    <div class="bg-white col-span-2 p-6 mb-6"></div>
+    <div class="bg-white p-6 mb-6">
+        <div class="flex flex-wrap gap-2">
+            <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+                Show All
+            </button>
+        </div>
+    </div>
+
+    <ul class="list-disc">
+    {#for item in site.collections.articles.sortBy("pubdate", true)}
+        <li><a href="{item.data.url}" target="_blank">{item.title}</a></li>
+    {/for}
+    </ul>
+</div>
+
