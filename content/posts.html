@@ -1,11 +1,251 @@
 ---
-layout: default
+layout: withcarousel
 title: Ben's Blog
 description: Infrequently Updated Blog
 ---
 
-<div class="posts-wrapper grid grid-cols-3 gap-4">
-    {#for post in site.collections.posts.paginated(page.paginator)}
-    {#postCard post site/}
+<div class="grid grid-cols-3 gap-4">
+    <!-- Carousel Container -->
+    <div class="relative col-span-3 bg-white rounded-lg shadow-xl p-4">
+        <!-- Navigation Buttons -->
+        <button
+                id="prevBtn"
+                class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                aria-label="Previous images"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+
+        <button
+                id="nextBtn"
+                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                aria-label="Next images"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+
+        <!-- Carousel Wrapper -->
+        <div
+                id="carousel"
+                class="carousel-container overflow-hidden"
+        >
+            <div
+                    id="carouselTrack"
+                    class="flex gap-4 transition-transform duration-500 ease-in-out"
+                    style="transform: translateX(0px);"
+            >
+                <!-- Images will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Indicators -->
+        <div id="indicators" class="flex justify-center gap-2 mt-6">
+            <!-- Indicators will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Image Counter -->
+    <div class="text-center col-span-3 mt-4 text-gray-600">
+        <span id="imageCounter">1-3</span> of <span id="totalImages">0</span>
+    </div>
+
+    {#for item in site.collections.posts.sortBy("pubdate", true).orEmpty}
+    <div><a href="{item.url}"><img src="{item.data.image}" width="328" alt="" loading="lazy"/></a></div>
+    <div>
+        <div class="font-semibold"><a href="{item.url}" class="text-gray-900 hover:underline">{item.title}</a></div>
+        <div class="text-gray-600 text-sm">{#if item.data.pubdate??}{item.data.pubdate}{/if}</div>
+    </div>
+    <div>
+        {#if item.description??}
+        <p class="text-gray-600">{item.description.wordLimit(30)}</p>
+        {/if}
+    </div>
     {/for}
 </div>
+
+<script>
+    const images = [
+        {#for item in site.collections.posts.orEmpty}
+        "{item.data.image}",
+        {/for}
+    ];
+
+    const urls = [
+        {#for item in site.collections.posts.orEmpty}
+        "{item.url}",
+        {/for}
+    ];
+
+    let currentIndex = 0;
+    const imagesPerView = 3;
+    const totalImages = images.length;
+    const totalSlides = Math.ceil(totalImages / imagesPerView);
+
+    const carouselTrack = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicators = document.getElementById('indicators');
+    const imageCounter = document.getElementById('imageCounter');
+    const totalImagesSpan = document.getElementById('totalImages');
+
+    // Initialize carousel
+    function initCarousel() {
+        if (totalImages === 0) return;
+
+        // Create image items
+        images.forEach((image, index) => {
+            const item = document.createElement('div');
+            item.className = 'carousel-item';
+            item.innerHTML = `
+                    <div class="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <a href="`+ urls[index] +`"
+                            class="block cursor-pointer relative">
+                        <img
+                            src="` + images[index] +`"
+                            alt="Blog post `+ (index + 1) +`"
+                            class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none"></div>
+                        </a>
+                    </div>
+                `;
+            carouselTrack.appendChild(item);
+        });
+
+        // Create indicators
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('button');
+            indicator.className = `w-3 h-3 rounded-full transition-all duration-300 ${
+                i === 0 ? 'bg-gray-800' : 'bg-gray-300 hover:bg-gray-400'
+            }`;
+            indicator.setAttribute('aria-label', `Go to slide `+ (i + 1));
+            indicator.addEventListener('click', () => goToSlide(i));
+            indicators.appendChild(indicator);
+        }
+
+        totalImagesSpan.textContent = totalImages;
+        updateCounter();
+    }
+
+    // Update carousel position
+    function updateCarousel() {
+        if (carouselTrack.children.length === 0) return;
+        const itemWidth = carouselTrack.children[0].offsetWidth + 16; // width + gap
+        const translateX = (-currentIndex * itemWidth * imagesPerView);
+        carouselTrack.style.transform = `translateX(`+ translateX + `px)`;
+
+        // Update indicators
+        const indicatorButtons = indicators.querySelectorAll('button');
+        indicatorButtons.forEach((btn, index) => {
+            if (index === currentIndex) {
+                btn.className = 'w-3 h-3 rounded-full transition-all duration-300 bg-gray-800';
+            } else {
+                btn.className = 'w-3 h-3 rounded-full transition-all duration-300 bg-gray-300 hover:bg-gray-400';
+            }
+        });
+
+        updateCounter();
+    }
+
+    // Update image counter
+    function updateCounter() {
+        const start = currentIndex * imagesPerView + 1;
+        const end = Math.min((currentIndex + 1) * imagesPerView, totalImages);
+        imageCounter.textContent = start +"-"+  end;
+    }
+
+    // Navigate to specific slide
+    function goToSlide(index) {
+        currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+        updateCarousel();
+    }
+
+    // Previous slide
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = totalSlides - 1; // Loop to end
+        }
+        updateCarousel();
+    }
+
+    // Next slide
+    function nextSlide() {
+        if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Loop to beginning
+        }
+        updateCarousel();
+    }
+
+    // Event listeners
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (carouselTrack) {
+        carouselTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carouselTrack.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+    }
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    }
+
+    // Auto-play (optional)
+    let autoPlayInterval = setInterval(nextSlide, 5000);
+
+    if (carouselTrack) {
+        carouselTrack.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+
+        carouselTrack.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+    }
+
+    // Initialize on load
+    window.addEventListener('load', () => {
+        initCarousel();
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                updateCarousel();
+            }, 250);
+        });
+    });
+</script>

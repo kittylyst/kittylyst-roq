@@ -1,7 +1,7 @@
 ---
 title: Welcome to my blog
 description: Welcome to the first post on my blog! (Future-dated to pin at the top)
-image: images/posts/blogpost1.jpg
+image: posts/blogpost1.jpg
 layout: post
 pubdate: 2100-01-01
 tags: [blogging, introduction]
