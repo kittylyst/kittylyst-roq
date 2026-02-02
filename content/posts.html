@@ -54,7 +54,7 @@ description: Infrequently Updated Blog
     </div>
 
     {#for item in site.collections.posts.sortBy("pubdate", true).orEmpty}
-    <div><a href="{item.url}"><img src="{item.data.image}" width="328" alt="" loading="lazy"/></a></div>
+    <div><a href="{item.url}"><img src="images/{item.data.image}" width="328" alt="" loading="lazy"/></a></div>
     <div>
         <div class="font-semibold"><a href="{item.url}" class="text-gray-900 hover:underline">{item.title}</a></div>
         <div class="text-gray-600 text-sm">{#if item.data.pubdate??}{item.data.pubdate}{/if}</div>
@@ -105,7 +105,7 @@ description: Infrequently Updated Blog
                         <a href="`+ urls[index] +`"
                             class="block cursor-pointer relative">
                         <img
-                            src="` + images[index] +`"
+                            src="images/` + images[index] +`"
                             alt="Blog post `+ (index + 1) +`"
                             class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
                             loading="lazy"
