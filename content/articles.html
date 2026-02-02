@@ -1,25 +1,30 @@
 ---
 layout: booklist
-title: Books Ben's written
+title: Articles
 description: |
-  Books that Ben has written
+   Technical articles and writing
 ---
 
-<div class="grid grid-cols-3 gap-4">
-    <!-- Control Panel -->
-    <div class="bg-white col-span-2 p-6 mb-6"></div>
-    <div class="bg-white p-6 mb-6">
-        <div class="flex flex-wrap gap-2">
-            <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                Show All
-            </button>
+<!--<div class="flex flex-wrap gap-2">-->
+<!--    <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">-->
+<!--        Show All-->
+<!--    </button>-->
+<!--</div>-->
+
+<div>
+    <section>
+    <h2 class="text-lg font-semibold text-gray-900 mb-3">Articles</h2>
+    <div class="space-y-1.5">
+        {#for item in site.collections.articles.sortBy("pubdate", true)}
+        <div class="grid grid-cols-1 sm:grid-cols-[1fr_11rem] gap-x-4 gap-y-0.5 items-baseline">
+            <div class="min-w-0">
+                <a href="{item.data.url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{item.title}</a>
+            </div>
+            <div class="text-gray-600 text-sm text-right whitespace-nowrap sm:pl-2">
+                {item.data.pubdate} ({item.data.publisher})
+            </div>
         </div>
+        {/for}
     </div>
-
-    <ul class="list-disc">
-    {#for item in site.collections.articles.sortBy("pubdate", true)}
-        <li><a href="{item.data.url}" target="_blank">{item.title}</a></li>
-    {/for}
-    </ul>
+    </section>
 </div>
-
