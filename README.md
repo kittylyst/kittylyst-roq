@@ -1,6 +1,6 @@
 # kittylyst-roq
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project is my personal website, built using Roq and uses Quarkus and Roq.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
@@ -55,6 +55,6 @@ If you want to learn more about building native executables, please consult <htt
 
 ## Related Guides
 
-- Roq ([guide](https://iamroq.com/docs/)): Hello, world! I’m Roq — a fun little SSG (Static Site Generator) with a Java soul and Quarkus energy.
+- Roq ([guide](https://iamroq.com/docs/)): Roq — a small SSG (Static Site Generator) built on Quarkus.
 
 ## Provided Code
