@@ -5,26 +5,24 @@ description: |
   Books that Ben has written
 ---
 
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-3 gap-6">
     <!-- Control Panel -->
-    <div class="bg-white col-span-2 p-6 mb-6"></div>
-    <div class="bg-white p-6 mb-6">
-        <div class="flex flex-wrap gap-2">
-            <button onclick="toggleHidden()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                Show All
-            </button>
-        </div>
+    <div class="col-span-2"></div>
+    <div class="flex items-center justify-end py-1">
+        <button onclick="toggleHidden()" class="px-3 py-1.5 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+            Show All
+        </button>
     </div>
 
     {#for item in site.collections.books.sortBy("pubdate", true)}
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>
-        <div>{item.title}</div>
+        <div class="font-semibold">{item.title}</div>
         <div>{item.data.isbn}</div>
         <div>&nbsp;</div>
         <div>{item.data.publisher} ({item.data.pubdate})</div>
     </div>
-    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><p>{item.content.raw}</p></div>
+    <div class="{#if item.data.hide??}hidden bk-hideable {/if}[&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_ul]:my-2"><div>{item.content.raw}</div></div>
     {/for}
 </div>
 

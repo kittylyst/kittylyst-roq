@@ -1,0 +1,21 @@
+---
+layout: withcarousel
+title: Ben's Upcoming Events and Appearances
+description: |
+  Videos, streams, podcasts and Ben in-person
+---
+
+<div class="grid grid-cols-3 gap-4">
+    {#for item in site.collections.upcoming.sortBy("pubdate", false).orEmpty}
+    <div><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
+    <div>
+        <div><b>{item.title}</b></div>
+        <div>{item.data.publisher}</div>
+    </div>
+    <div>
+        {item.content.raw}
+    </div>
+    {/for}
+</div>
+
+

@@ -33,22 +33,24 @@
 kittylyst-roq/
 ├── content/              # Source content files
 │   ├── books/           # Book collection (8 books)
-│   ├── posts/           # Blog posts
-│   ├── videos/          # Video content pages
+│   ├── articles/        # Articles collection (67 articles)
+│   ├── posts/           # Blog posts (6 posts)
+│   ├── videos/          # Video content pages (24+ videos)
 │   ├── gallery/         # Photo gallery
-│   └── *.html           # Static pages (index, about, contact, etc.)
-├── templates/           # Qute templates
-│   ├── layouts/         # Page layouts (default, page, post, booklist)
-│   └── partials/       # Reusable components (navbar, footer)
-├── data/                # Data files (YAML)
-│   └── authors.yml      # Author information
-├── public/              # Static assets
-│   └── images/          # Images (books, main gallery, videos)
+│   └── *.html           # Static pages (index, about, books, articles, videos, posts, gallery, 404)
+├── templates/            # Qute templates
+│   ├── layouts/         # Page layouts (default, page, post, booklist, withcarousel)
+│   ├── partials/        # Reusable components (navbar, footer, header)
+│   └── tags/            # Qute tags (e.g. postCard)
+├── data/                 # Data files (YAML)
+│   └── authors.yml      # Author information (Ben Evans)
+├── public/               # Static assets
+│   └── images/          # Images (books, main gallery, videos, posts)
 ├── src/main/
-│   ├── java/            # Java source code (currently empty)
+│   ├── java/roq/kittylyst/  # Java source (Extensions, QuteTest)
 │   ├── resources/       # Application configuration
 │   └── docker/          # Dockerfiles for various deployment modes
-└── target/              # Build output directory
+└── target/               # Build output directory
 ```
 
 ## Content Collections
@@ -62,34 +64,43 @@ The site organizes content into collections configured in `application.propertie
    - Contains 8 books ranging from 2012 to 2026
    - Includes Java-related titles (Nutshell series, Well-Grounded Java, Optimizing Java)
 
-2. **Videos Collection** (`site.collections.videos`)
+2. **Articles Collection** (`site.collections.articles`)
    - Enabled: Yes
    - Layout: "book"
    - Future posts: Enabled
-   - Topics include: Observability, Java in Containers, Optimizing Java, Practical Scala
+   - Contains 67 articles (Markdown with front matter: title, url, pubdate, type, publisher)
 
-3. **Posts Collection** (`site.collections.posts`)
-   - Enabled: No (currently disabled)
-   - Contains at least one sample post: "The First Roq!"
+3. **Videos Collection** (`site.collections.videos`)
+   - Enabled: Yes
+   - Layout: "book"
+   - Future posts: Enabled
+   - Contains 24+ video pages (HTML) with thumbnails; videos page uses withcarousel layout
+
+4. **Posts Collection** (`site.collections.posts`)
+   - Enabled: Yes
+   - Layout: "post"
+   - Future posts: Enabled
+   - Contains 6 blog posts (Markdown with front matter)
 
 ## Templates & Layouts
 
 ### Layouts
-- **default.html** - Base layout with navbar, footer, and Tailwind CSS integration
+- **default.html** - Base layout with navbar, footer, and Tailwind CSS (max-w-4xl)
 - **page.html** - Standard page layout with title and content area
-- **post.html** - Blog post layout (referenced but not shown in detail)
-- **booklist.html** - Specialized layout for book/video listings with toggle functionality
+- **post.html** - Blog post layout
+- **booklist.html** - Layout for book/article listings with toggle (max-w-6xl)
+- **withcarousel.html** - Layout for videos page with carousel (max-w-6xl)
 
 ### Partials
-- **navbar.html** - Navigation menu with links to Books, Videos, Gallery, About, Contact
+- **navbar.html** - Navigation: Upcoming, Videos, Books, Articles, Blog, Gallery, About
 - **footer.html** - Footer with copyright and "Built with Roq" attribution
 
 ## Features
 
 ### Content Management
-- **Markdown Support** - Books and posts use Markdown with front matter
-- **Front Matter** - YAML metadata for pages (title, description, layout, etc.)
-- **Collections** - Organized content grouping (books, videos, posts)
+- **Markdown Support** - Books, articles, and posts use Markdown with front matter
+- **Front Matter** - YAML metadata for pages (title, description, layout, url, pubdate, etc.)
+- **Collections** - Books, articles, videos, posts (all enabled)
 - **Tagging** - Blog post tagging support via plugin
 
 ### UI Features
@@ -110,10 +121,8 @@ The site organizes content into collections configured in `application.propertie
 ## Configuration
 
 ### Application Properties (`application.properties`)
-- Books collection enabled with "book" layout
-- Videos collection enabled with "book" layout
-- Posts collection currently disabled
-- Future posts enabled for books and videos
+- Books, articles, videos: enabled with layout "book"; future posts enabled
+- Posts: enabled with layout "post"; future posts enabled
 
 ### Build Configuration (`pom.xml`)
 - Java 21 compiler target
@@ -129,20 +138,17 @@ The site organizes content into collections configured in `application.propertie
 - Optimizing Java
 - Optimizing Cloud-Native Java
 
-### Videos (4 topics)
-- Getting Started with Observability
-- Java in Containers
-- Optimizing Java
-- Practical Scala
+### Articles (67 total)
+- Markdown files with front matter; linked to external publishers (InfoQ, O’Reilly, etc.)
+
+### Videos (24+ total)
+- HTML pages with thumbnails; topics include Observability, Java in Containers, Optimizing Java, JVM, Devoxx talks, etc.
+
+### Posts (6 total)
+- Blog posts in Markdown (e.g. welcome post, Java Reconsidered, Well-Grounded Java 2e, advice for developers, cryptocurrency).
 
 ### Pages
-- Home (index.html)
-- About
-- Books listing
-- Videos listing
-- Gallery
-- Contact
-- 404 error page
+- Home (index.html), About, Books listing, Articles listing, Videos listing, Posts (blog), Gallery, 404
 
 ## Development Workflow
 
@@ -170,8 +176,8 @@ The site organizes content into collections configured in `application.propertie
 ## Data Files
 
 ### Authors (`data/authors.yml`)
-- Contains author profile for "roqqy" (Roqqy Balboa)
-- Includes bio, avatar, and social links
+- Contains author profile for "ben" (Ben Evans)
+- Includes name, job, nickname (kittylyst), profile, avatar, bio
 - Used for blog post attribution
 
 ## Static Assets
@@ -184,9 +190,9 @@ The site organizes content into collections configured in `application.propertie
 
 ## Current State
 
-- **Java Source Code**: None currently (empty `src/main/java/` directory)
-- **Content**: Fully populated with books, videos, and sample posts
-- **Templates**: Complete template structure with layouts and partials
+- **Java Source Code**: `Extensions.java`, `QuteTest.java` in `src/main/java/roq/kittylyst/`
+- **Content**: Books (8), articles (67), videos (24+), posts (6), gallery; all collections enabled
+- **Templates**: Layouts (default, page, post, booklist, withcarousel), partials, tags
 - **Build System**: Fully configured Maven project
 - **Deployment**: Docker configurations ready for multiple deployment modes
 
@@ -195,6 +201,6 @@ The site organizes content into collections configured in `application.propertie
 - The project uses Roq, a Java-based SSG built on Quarkus
 - Tailwind CSS is loaded via CDN (not bundled)
 - Theme switching uses localStorage for persistence
-- Posts collection is currently disabled in configuration
-- The site appears to be a personal portfolio for Ben Evans (kittylyst)
+- All four collections (books, articles, videos, posts) are enabled
+- Personal portfolio site for Ben Evans (kittylyst)
 
