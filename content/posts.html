@@ -54,7 +54,7 @@ description: Infrequently Updated Blog
     </div>
 
     {#for item in site.collections.posts.sortBy("pubdate", true).orEmpty}
-    <div><a href="{item.url}"><img src="images/{item.data.image}" width="328" alt="" loading="lazy"/></a></div>
+    <div><a href="{item.url}"><img src="{item.image}" width="328" alt="" loading="lazy"/></a></div>
     <div>
         <div class="font-semibold"><a href="{item.url}" class="text-gray-900 hover:underline">{item.title}</a></div>
         <div class="text-gray-600 text-sm">{#if item.data.pubdate??}{item.data.pubdate}{/if}</div>
@@ -70,7 +70,7 @@ description: Infrequently Updated Blog
 <script>
     const images = [
         {#for item in site.collections.posts.orEmpty}
-        "{item.data.image}",
+        "{item.image}",
         {/for}
     ];
 
