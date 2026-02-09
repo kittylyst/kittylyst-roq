@@ -15,7 +15,7 @@ description: |
     </div>
 
     {#for item in site.collections.books.sortBy("pubdate", true)}
-    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.url}" target="_blank"><img src="{item.data.image}" width="328"/></a></div>
+    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
     <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>
         <div class="font-semibold">{item.title}</div>
         <div>{item.data.isbn}</div>
