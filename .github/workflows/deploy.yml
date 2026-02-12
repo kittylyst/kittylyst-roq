@@ -2,7 +2,7 @@ name: Roq Site Deploy
 
 on:
   push:
-    branches: [ main ]   # Switch to the branch which should be deployed to GitHub Pages
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -14,18 +14,29 @@ jobs:
         uses: quarkiverse/quarkus-roq@v1
         with:
           github-pages: false
-      - name: Publishing blog
+      - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
           name: site
           path: target/roq
           retention-days: 3
+# iridescent-mermaid-7fba8c
+# ${{ secrets.NETLIFY_AUTH_TOKEN }}
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     name: 'Deploy to Netlify'
     steps:
-      - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
         with:
+          name: site
+          path: site
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: './site'
+          production-deploy: true
+        env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          NETLIFY_DEPLOY_TO_PROD: false
-          build_directory: target/roq
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
