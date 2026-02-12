@@ -1,16 +1,16 @@
 {@io.quarkiverse.roq.frontmatter.runtime.model.DocumentPage post}
 
-<article class="article-item">
-  <time class="article-date" datetime="{post.date}">
+<article class="py-3 border-b border-gray-100">
+  <time class="text-gray-500 text-sm" datetime="{post.date}">
     {post.date.format('MM-dd-yyyy')}
   </time>
-  <h2 class="article-title">
-    <a href="{post.url}">
+  <h2 class="text-lg font-semibold text-gray-900 mt-1">
+    <a href="{post.url}" class="hover:underline">
       {post.title}
     </a>
   </h2>
   {#if post.description??}
-  <p class="article-description">{post.description.wordLimit(30)}</p>
+  <p class="text-gray-600 text-sm mt-1">{post.description.wordLimit(30)}</p>
   {/if}
   {#if post.data.tags??}
   {#let tags = post.data.tags.asStrings}
@@ -18,7 +18,7 @@
   <div class="flex flex-wrap gap-2 mt-3">
     {#for tag in tags}
     <a href="{site.url('/posts/tag/')}{tag.slugify}"
-       class="article-tag">#{tag.slugify}</a>
+       class="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition">#{tag.slugify}</a>
     {/for}
   </div>
   {/if}
