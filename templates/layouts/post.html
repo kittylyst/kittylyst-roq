@@ -10,7 +10,7 @@ asciidoc-attributes:
   <header class="mb-8">
     <h1 class="text-3xl font-semibold text-gray-900">{page.title}</h1>
     <div class="text-gray-500 text-sm mt-2">
-      <time datetime="{page.date}">{page.date.format('MM-dd-yyyy')}</time>
+      <time datetime="{page.date}">{page.date.format('yyyy-MM-dd')}</time>
       {#if page.data.author??} &bull; <span>{page.data.author}</span>{/if}
     </div>
   </header>
@@ -19,6 +19,7 @@ asciidoc-attributes:
   <article>
     <div class="[&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_ul]:my-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-4 [&_p]:my-3 [&_p]:text-gray-800 [&_p]:leading-relaxed [&_a]:text-blue-600 [&_a]:hover:underline">
       {#insert /}
+        <br/><br/>
         <img src="/images/{page.data.image}" width="328" alt="" loading="lazy"/>
     </div>
 
@@ -28,19 +29,19 @@ asciidoc-attributes:
 
       <div class="flex items-baseline gap-4 py-2 border-b border-gray-100">
         <span class="text-gray-500 text-sm font-medium w-24">Published</span>
-        <span class="text-gray-900 text-sm">{page.date.format('MM-dd-yyyy')}</span>
+        <span class="text-gray-900 text-sm">{page.date.format('yyyy-MM-dd')}</span>
       </div>
 
       {#if page.data.tags??}
-      <div class="flex items-baseline gap-4 py-2">
+<!--      <div class="flex items-baseline gap-4 py-2">
         <span class="text-gray-500 text-sm font-medium w-24">Tags</span>
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2"> -->
           {#for tag in page.data.tags.asStrings}
           {#let tagSlug = tag.slugify}
-          <a href="{site.url('/posts/tag', tagSlug)}" class="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition">&#35; {tagSlug}</a>
+          <!-- <a href="{site.url('/posts/tag', tagSlug)}" class="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition">&#35; {tagSlug}</a> -->
           {/for}
-        </div>
-      </div>
+<!--        </div>
+      </div> -->
       {/if}
     </div>
   </article>
