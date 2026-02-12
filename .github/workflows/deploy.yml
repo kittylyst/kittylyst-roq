@@ -21,6 +21,7 @@ jobs:
           path: target/roq
           retention-days: 3
   deploy:
+    runs-on: ubuntu-latest
     name: 'Deploy to Netlify'
     steps:
       - uses: jsmrcaga/action-netlify-deploy@v2.0.0
