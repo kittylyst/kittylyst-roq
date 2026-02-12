@@ -20,7 +20,6 @@ jobs:
           name: site
           path: target/roq
           retention-days: 3
-
 # iridescent-mermaid-7fba8c
 # ${{ secrets.NETLIFY_AUTH_TOKEN }}
   deploy:
