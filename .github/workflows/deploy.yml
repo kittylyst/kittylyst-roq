@@ -14,6 +14,8 @@ jobs:
         uses: quarkiverse/quarkus-roq@v1
         with:
           github-pages: false
+      - name: Include netlify.toml in build output
+        run: cp netlify.toml target/roq/
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
         with:
