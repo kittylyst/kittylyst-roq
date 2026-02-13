@@ -1,0 +1,36 @@
+# Netlify configuration
+# The site is pre-built on GitHub Actions (Quarkus Roq),
+# so no build command is needed here.
+
+[build]
+  publish = "target/roq"
+
+# Pretty URLs: serve /about/index.html as /about/
+[build.processing.html]
+  pretty_urls = true
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404/index.html"
+  status = 404
+
+# Security and caching headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets (JS/CSS bundles) aggressively
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache images with a long TTL
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
