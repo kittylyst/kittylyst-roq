@@ -3,7 +3,6 @@
 # so no build command is needed here.
 
 [build]
-  publish = "target/roq"
   command = "echo 'Build runs on GitHub Actions, not Netlify' && exit 1"
 
 # Pretty URLs: serve /about/index.html as /about/
