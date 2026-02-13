@@ -5,7 +5,7 @@ description: |
   Books that Ben has written
 ---
 
-<div class="grid grid-cols-3 gap-6">
+<div class="grid grid-cols-3 gap-x-6 gap-y-0">
     <!-- Control Panel -->
     <div class="col-span-2"></div>
     <div class="flex items-center justify-end py-1">
@@ -15,14 +15,15 @@ description: |
     </div>
 
     {#for item in site.collections.books.sortBy("pubdate", true)}
-    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
-    <div {#if item.data.hide??} class="hidden bk-hideable"{/if}>
+    <div class="{#if item.data.hide??}hidden bk-hideable {/if}pt-6 pb-6"><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
+    <div class="{#if item.data.hide??}hidden bk-hideable {/if}pt-6 pb-6">
         <div class="font-semibold">{item.title}</div>
         <div>{item.data.isbn}</div>
         <div>&nbsp;</div>
         <div>{item.data.publisher} ({item.data.pubdate})</div>
     </div>
-    <div class="{#if item.data.hide??}hidden bk-hideable {/if}[&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_ul]:my-2"><div>{item.content.raw}</div></div>
+    <div class="{#if item.data.hide??}hidden bk-hideable {/if}pt-6 pb-6 [&_ul]:list-disc [&_ul]:list-inside [&_ul]:space-y-1 [&_ul]:my-2"><div>{item.content.raw}</div></div>
+    {#if item_hasNext}<div class="{#if item.data.hide??}hidden bk-hideable {/if}col-span-3 border-b border-gray-200"></div>{/if}
     {/for}
 </div>
 
