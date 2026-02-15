@@ -1,0 +1,77 @@
+---
+title: How I built this site
+description: A quick tour through the technologies and approaches I used to build my site.
+image: posts/library-book-stacks.jpg
+layout: post
+pubdate: 2026-02-15
+tags: [roq, web]
+author: kittylyst
+draft: true
+---
+
+<p>Inspired by several of my friends and colleagues (with a particular shout-out to <a href="https://hollycummins.com/">Holly Cummins</a>),
+    I decided to rebuild my personal / author site. It's been something of a journey.</p>
+<p>Although I started developing websites in 1997, I haven't done much in the way of JS and HTML for
+    many years. The last time I wrote JS professionally as a major part of my job was over 20 years ago.
+    My last website was written in Gatsby for me by a contractor - I picked up enough React while I was at New Relic to
+    write simple components when there were no front-end devs available - and figured that I could maintain it after the
+    initial delivery. To a point, this was true, but I never felt completely comfortable working with it, and that added
+    additional friction, and I updated less often as a result.</p>
+<p>So, while evaluating options and wanting to stick closer to a tech stack that would allow me to focus on the writing
+    and creativity, not the maintenance I discovered <a href="https://iamroq.com/">Roq</a>, which is a static site generator
+    built on top of <a href="https://quarkus.io/">Quarkus</a>.</p>
+<h2 class="text-xl font-semibold text-gray-600">If you're not familiar with Quarkus</h2>
+<p>Quarkus is one of the most popular Java frameworks - not as well-known as Spring Boot but (as far as we can tell,
+    estimating these numbers is notoriously difficult) probably second most widely-used for Java services.</p>
+<p>Quarkus was originally designed to be Kubernetes-native and to integrate well with the emerging native compilation
+    technologies for Java (such as GraalVM Native Mode and Project Leyden). However, in the best tradition of
+    "the street finds its own uses for things", it turns out that Quarkus's model of "shifting computation left"
+    (so that as much work is done at build time, in order to reduce startup time) has other benefits.</p>
+<p>In particular, Quarkus Dev Mode provides a tight developer loop, enabling rapid development and what has
+    become known as "Quarkus Developer Joy". It isn't an exaggeration to say that Quarkus really does seem to
+    strike a chord in many developers who start to use it.</p>
+<h2 class="text-xl font-semibold text-gray-600">So where does Roq fit in?</h2>
+<p>For Roq, it turns out that building on top of Quarkus already gives us a lot of what's needed for an SSG:</p>
+<ul class="list-decimal list-inside space-y-1 my-3">
+    <li>Quarkus provides Qute - a typesafe template engine</li>
+    <li>Roq Plugins and Themes are implemented as Quarkus extensions</li>
+    <li>Quarkus dev mode serves files statically and dynamically</li>
+    <li>Quarkus Dependency injection (CDI) extends and binds data and templates together</li>
+    <li>Quarkus extensions can be used with Roq (e.g. the Quarkus web-bundler)</li>
+    <li>Full use of the Quarkus test framework</li>
+</ul>
+<p>Roq is then a "rock" on top of Quarkus, providing some familiar SSG capabilities, and some unique ones:</p>
+<ul class="list-decimal list-inside space-y-1 my-3">
+    <li>Create endpoints based on convention-over-configuration</li>
+    <li>Extensive use of Frontmatter for metadata</li>
+    <li>Define data files (e.g. yml or json) and use them in templates</li>
+    <li>Additional plugins and themes</li>
+    <li>Export fom the Quarkus app to a static site</li>
+    <li>Use GitHub Actions for publishing to GH Pages (or elsewhere)</li>
+</ul>
+<h2 class="text-xl font-semibold text-gray-600">How do I use Roq?</h2>
+<p>One of the things that stands out for me about Roq is the use of multiple processing pipelines.
+    I personally use HTML files for items with content, and Markdown for anything which is metadata-only.
+    My HTML files are valid (except for being fragments that are intended to be inserted into templates).
+    The source for this site is <a href="https://github.com/kittylyst/kittylyst-roq" target="_blank">here</a>.</p>
+<p>Fitting in to the theme of not doing much front-end dev, two tools I've found to be very useful are
+    <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> - because it fits into how I (as a
+    fundamentally backend person) feel about frontend and <a href=" https://mvnpm.org/doc" target="_blank">MVNPM</a>,
+    which bridges any require JS modules into the Maven build that Quarkus uses (other build tools can
+    be used with Quarkus, but I recommend that you don't). This is much easier than dealing with the horrors
+    of NPM directly.</p>
+<p>My Roq site has several routes, each of which is represented in the navbar, and
+    corresponds to a single HTML file under the content/ directory. Roq uses convention-over-configuration,
+    so that, for example, about.html is mapped to /about as a route. Roq also has a concept of collections,
+    which are entities (such as blog posts) that may grow over time. This site has 5 separate collections for articles
+    (metadata only), books, blog entries, upcoming events and videos, and each is handled under a separate
+    route.</p>
+<h2 class="text-xl font-semibold text-gray-600">What about AI tools?</h2>
+<p>I'm glad you asked.</p>
+<p>My primary AI coding tool for this is Cursor, which I have found to be a useful addition to my toolbelt
+    (albeit not transformative) - I will expand fully on my experiences with AI tools in a future post. tl;dr -
+    it's somewhat complex and nebulous and I need more space and time to think about it and unpack it.
+</p>
+<h2 class="text-xl font-semibold text-gray-600">How does the publication workflow operate?</h2>
+<p>My publishing wokflow is to GH, and then via an automatic trigger that sends the generated static files to
+    <a href="https://www.netlify.com/" target="_blank">Netlify</a>. The relevant actions are in the repo.</p>
