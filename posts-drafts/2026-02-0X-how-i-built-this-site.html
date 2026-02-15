@@ -9,14 +9,44 @@ author: kittylyst
 draft: true
 ---
 
-Inspired by several of my friends and colleagues (with a particular shout-out to Holly Cummins),
-I decided to rebuild my personal / author site.</p>
-<p>I started developing websites in 1997, but I haven't done much in the way of JS and HTML for
-many years. My last website was written in Gatsby for me by a contractor - I picked up enough
-React while I was at New Relic to write simple components when there were no front-end devs
-available - and figured that I could maintain it after the initial delivery. To a point, this
-was true, but I never felt as comfortable working in it as I did in other options.</p>
+Inspired by several of my friends and colleagues (with a particular shout-out to <a href="https://hollycummins.com/">Holly Cummins</a>),
+I decided to rebuild my personal / author site. It's been something of a journey.</p>
+<p>Although I started developing websites in 1997, I haven't done much in the way of JS and HTML for
+many years. The last time I wrote JS professionally as a major part of my job was over 20 years ago.
+My last website was written in Gatsby for me by a contractor - I picked up enough React while I was at New Relic to
+write simple components when there were no front-end devs available - and figured that I could maintain it after the
+initial delivery. To a point, this was true, but I never felt completely comfortable working with it.</p>
+<p>So, while evaluating options, and wanting to stick closer to a tech stack that would allow me to focus on the writing
+and creativity, not the maintenance I discovered <a href="https://iamroq.com/">Roq</a>, which is a static site generator
+built on top of <a href="https://quarkus.io/">Quarkus</a>.</p>
+<h2>If you're not familiar with Quarkus</h2>
+<p>Quarkus is one of the most popular Java frameworks - not as well-known as Spring Boot but (as far as we can tell,
+estimating these numbers is notoriously difficult) probably second most widely-used among Java services.
+
+Quarkus Dev Mode
+
+<h2>So where does Roq fit in?</h2>
+<p>Quarkus already gives us a lot of what's needed for an SSG:
+
+Quarkus has Qute as Type-Safe template engine , some sugar for Roq.
+Roq Plugins and Themes are Quarkus extensions.
+Quarkus allow to serve files statically and dynamically.
+CDI allows to extend and bind data and templates together.
+Quarkus extensions can be used with Roq, the most use-full is the Quarkus Web-Bundler (to bundle script, styles and web deps without any config).
+Quarkus test framework.
 
 
-<p>If you're not familiar with Quarkus</p>
-<p>
+Roq is a rock on top of Quarkus:
+
+Create endpoints for all your static site based on conventions (dir structure and Frontmatter data).
+Allow to define data files (yml or json) and consume them in templates.
+Provide plugins and themes.
+Add a command to export you Quarkus app as a static site.
+A GitHub Action for automation.</p>
+<h2>How do I use Roq?</h2>
+<p>One of the things that stands out for me about Roq is the use of multiple processing pipelines.
+    I personally use HTML files for items with content, and Markdown for anything which is metadata-only.
+
+    Fitting in to the theme of not doing much front-end dev, two tools I've found to be very useful are
+    Tailwind, and <a href=" https://mvnpm.org/doc" target="_blank">MVNPM</a>, which bridges any require JS
+    modules into the Maven build that Quarkus uses.</p>
