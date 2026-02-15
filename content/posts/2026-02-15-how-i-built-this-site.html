@@ -51,7 +51,9 @@ draft: true
 </ul>
 <h2 class="text-xl font-semibold text-gray-600">How do I use Roq?</h2>
 <p>One of the things that stands out for me about Roq is the use of multiple processing pipelines.
-    I personally use HTML files for items with content, and Markdown for anything which is metadata-only.</p>
+    I personally use HTML files for items with content, and Markdown for anything which is metadata-only.
+    My HTML files are valid (except for being fragments that are intended to be inserted into templates).
+    The source for this site is <a href="https://github.com/kittylyst/kittylyst-roq" target="_blank">here</a>.</p>
 <p>Fitting in to the theme of not doing much front-end dev, two tools I've found to be very useful are
     <a href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> - because it fits into how I (as a
     fundamentally backend person) feel about frontend and <a href=" https://mvnpm.org/doc" target="_blank">MVNPM</a>,
@@ -60,8 +62,16 @@ draft: true
     of NPM directly.</p>
 <p>My Roq site has several routes, each of which is represented in the navbar, and
     corresponds to a single HTML file under the content/ directory. Roq uses convention-over-configuration,
-    so that, for example, about.html is mapped to /about as a route</p>
+    so that, for example, about.html is mapped to /about as a route. Roq also has a concept of collections,
+    which are entities (such as blog posts) that may grow over time. This site has 5 separate collections for articles
+    (metadata only), books, blog entries, upcoming events and videos, and each is handled under a separate
+    route.</p>
 <h2 class="text-xl font-semibold text-gray-600">What about AI tools?</h2>
-<p>Glad you asked.</p>
+<p>I'm glad you asked.</p>
 <p>My primary AI coding tool for this is Cursor, which I have found to be a useful addition to my toolbelt
-    (albeit not transformative) - I will expand fully on my experiences with AI tools in a future post.</p>
+    (albeit not transformative) - I will expand fully on my experiences with AI tools in a future post. tl;dr -
+    it's somewhat complex and nebulous and I need more space and time to think about it and unpack it.
+</p>
+<h2 class="text-xl font-semibold text-gray-600">How does the publication workflow operate?</h2>
+<p>My publishing wokflow is to GH, and then via an automatic trigger that sends the generated static files to
+    <a href="https://www.netlify.com/" target="_blank">Netlify</a>. The relevant actions are in the repo.</p>
