@@ -14,5 +14,138 @@ social-bluesky: ogkittylyst.bsky.social
     <h1 class="text-base font-normal text-xl text-black list-none">Ben Evans - Architect, Author, Educator, Speaker</h1>
     <!-- FIXME Move description text to rollover for the image -->
     <h2 class="text-base font-normal text-black list-none">{page.description}</h2>
-    <img src="images/main/another-place.jpg" loading="lazy" alt="Ben visiting 'Another Place' by Anthony Gormley" class="h-full w-full object-cover object-center transition duration-200" />
+    <div id="hero-carousel" class="relative mt-3 aspect-video w-full overflow-hidden rounded-lg" tabindex="0" aria-label="Homepage image carousel">
+        <img src="/images/main/another-place.jpg"
+             alt="Ben visiting 'Another Place' by Anthony Gormley"
+             class="hero-slide absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700"
+             loading="eager" />
+        <img src="/images/main/devoxx2019.jpg"
+             alt="Ben speaking at Devoxx 2019"
+             class="hero-slide absolute inset-0 hidden h-full w-full object-cover object-center transition-opacity duration-700"
+             loading="lazy" />
+        <img src="/images/main/bje_still_optimizing_java.png"
+             alt="Still optimizing Java"
+             class="hero-slide absolute inset-0 hidden h-full w-full object-cover object-center transition-opacity duration-700"
+             loading="lazy" />
+
+        <button id="hero-prev"
+                type="button"
+                aria-label="Previous image"
+                class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-3 py-2 text-white hover:bg-black/70">
+            ‹
+        </button>
+        <button id="hero-next"
+                type="button"
+                aria-label="Next image"
+                class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-3 py-2 text-white hover:bg-black/70">
+            ›
+        </button>
+
+        <div id="hero-dots" class="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2"></div>
+    </div>
 </div>
+
+<script>
+    (function() {
+        const carousel = document.getElementById('hero-carousel');
+        const slides = document.querySelectorAll('.hero-slide');
+        const prevButton = document.getElementById('hero-prev');
+        const nextButton = document.getElementById('hero-next');
+        const dotsContainer = document.getElementById('hero-dots');
+        if (!carousel || !slides || slides.length < 2 || !prevButton || !nextButton || !dotsContainer) return;
+
+        let currentIndex = 0;
+        let autoAdvance = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            slides.forEach(function(_, index) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', 'Go to image ' + (index + 1));
+                dot.className = 'h-2.5 w-2.5 rounded-full transition ' +
+                    (index === currentIndex ? 'bg-white' : 'bg-white/50 hover:bg-white/80');
+                dot.addEventListener('click', function() {
+                    goToSlide(index);
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function goToSlide(index) {
+            slides[currentIndex].classList.add('hidden');
+            currentIndex = (index + slides.length) % slides.length;
+            slides[currentIndex].classList.remove('hidden');
+            renderDots();
+        }
+
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        function stopAutoAdvance() {
+            if (autoAdvance) {
+                clearInterval(autoAdvance);
+                autoAdvance = null;
+            }
+        }
+
+        function startAutoAdvance() {
+            stopAutoAdvance();
+            autoAdvance = setInterval(nextSlide, 4500);
+        }
+
+        prevButton.addEventListener('click', function() {
+            prevSlide();
+            startAutoAdvance();
+        });
+
+        nextButton.addEventListener('click', function() {
+            nextSlide();
+            startAutoAdvance();
+        });
+
+        carousel.addEventListener('mouseenter', stopAutoAdvance);
+        carousel.addEventListener('mouseleave', startAutoAdvance);
+
+        carousel.addEventListener('touchstart', function(event) {
+            stopAutoAdvance();
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            const deltaX = touchEndX - touchStartX;
+            if (Math.abs(deltaX) > 40) {
+                if (deltaX > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+            }
+            startAutoAdvance();
+        }, { passive: true });
+
+        document.addEventListener('keydown', function(event) {
+            const tag = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : '';
+            if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+            if (event.key === 'ArrowLeft') {
+                prevSlide();
+                startAutoAdvance();
+            } else if (event.key === 'ArrowRight') {
+                nextSlide();
+                startAutoAdvance();
+            }
+        });
+
+        renderDots();
+        startAutoAdvance();
+    })();
+</script>
