@@ -6,7 +6,9 @@ description: |
 ---
 
 <div class="grid grid-cols-3 gap-x-6 gap-y-0">
+    {#let today = now.format('yyyy-MM-dd')}
     {#for item in site.collections.upcoming.sortBy("pubdate", false).orEmpty}
+    {#if item.data.pubdate > today}
     <div class="pt-6 pb-6"><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
     <a href="{item.data.related-url}" target="_blank"><div class="pt-6 pb-6">
         <div><b>{item.title}</b></div>
@@ -17,5 +19,6 @@ description: |
         {item.content.raw}
     </div>
     {#if item_hasNext}<div class="col-span-3 border-b border-gray-200"></div>{/if}
+    {/if}
     {/for}
 </div>
