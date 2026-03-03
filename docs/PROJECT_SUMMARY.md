@@ -2,205 +2,159 @@
 
 ## Overview
 
-**kittylyst-roq** is a static site generator (SSG) project built with **Quarkus** and **Roq**. It serves as a personal portfolio website for Ben Evans, showcasing books, videos, blog posts, and a photo gallery. The project uses Java 21 and leverages Quarkus 3.30.4 for building a modern, performant static site.
+**kittylyst-roq** is a personal site for Ben Evans built as a static site with **Quarkus + Roq**.
+It uses content collections (articles, books, videos, posts, upcoming), Qute templates, and Tailwind utility classes.
 
-**Migration Status**: This project is a migration from a Gatsby-based site (`../kittylyst/`) to Quarkus/Roq. See `OLD_SITE_SUMMARY.md` for details on the original site and `MIGRATION_ANALYSIS.md` for migration planning.
+## Current Stack
 
-## Technology Stack
+- **Java**: 21
+- **Quarkus**: 3.30.4
+- **Roq**: 2.0.3
+- **Template engine**: Qute
+- **CSS**: Tailwind via CDN
+- **Build tool**: Maven (`mvnw`)
 
-### Core Framework
-- **Quarkus 3.30.4** - Supersonic Subatomic Java Framework
-- **Java 21** - Modern Java runtime
-- **Roq 2.0.3** - Static Site Generator with Java/Quarkus integration
-- **Qute** - Template engine (used by Roq)
+## Repository Structure
 
-### Frontend & Styling
-- **Tailwind CSS** - Utility-first CSS framework (via CDN)
-- **Web Bundler 2.0.4** - Asset bundling and optimization
-- **Tailwind CSS Plugin** - Integration for Quarkus Web Bundler
-
-### Build Tools
-- **Maven** - Build and dependency management
-- **Maven Wrapper (mvnw)** - Portable Maven execution
-
-### Plugins & Extensions
-- **quarkus-roq-plugin-tagging** - Tagging functionality for blog posts
-- **quarkus-arc** - Dependency injection framework
-
-## Project Structure
-
-```
+```text
 kittylyst-roq/
-├── content/              # Source content files
-│   ├── books/           # Book collection (8 books)
-│   ├── articles/        # Articles collection (67 articles)
-│   ├── posts/           # Blog posts (6 posts)
-│   ├── videos/          # Video content pages (24+ videos)
-│   ├── gallery/         # Photo gallery
-│   └── *.html           # Static pages (index, about, books, articles, videos, posts, gallery, 404)
-├── templates/            # Qute templates
-│   ├── layouts/         # Page layouts (default, page, post, booklist, withcarousel)
-│   ├── partials/        # Reusable components (navbar, footer, header)
-│   └── tags/            # Qute tags (e.g. postCard)
-├── data/                 # Data files (YAML)
-│   └── authors.yml      # Author information (Ben Evans)
-├── public/               # Static assets
-│   └── images/          # Images (books, main gallery, videos, posts)
-├── src/main/
-│   ├── java/roq/kittylyst/  # Java source (Extensions, QuteTest)
-│   ├── resources/       # Application configuration
-│   └── docker/          # Dockerfiles for various deployment modes
-└── target/               # Build output directory
+├── content/                    # Site pages + collection documents
+│   ├── articles/               # 103 markdown docs
+│   ├── books/                  # 8 HTML docs
+│   ├── videos/                 # 27 HTML docs
+│   ├── posts/                  # 5 HTML docs
+│   ├── upcoming/               # 4 HTML docs
+│   └── *.html                  # index/about/listing pages/404
+├── templates/
+│   ├── layouts/                # default, page, post, booklist, withcarousel
+│   ├── partials/               # navbar, footer
+│   └── tags/                   # postCard
+├── data/
+│   └── authors.yml
+├── public/
+│   └── images/
+├── src/main/resources/
+│   └── application.properties  # collection config
+├── .github/workflows/
+│   └── deploy.yml
+├── netlify.toml
+└── docs/
 ```
 
-## Content Collections
+## Collection Configuration
 
-The site organizes content into collections configured in `application.properties`:
+From `src/main/resources/application.properties`:
 
-1. **Books Collection** (`site.collections.books`)
-   - Enabled: Yes
-   - Layout: "book"
-   - Future posts: Enabled
-   - Contains 8 books ranging from 2012 to 2026
-   - Includes Java-related titles (Nutshell series, Well-Grounded Java, Optimizing Java)
+- `site.collections.articles=true`, layout `"book"`, `future=true`
+- `site.collections.books=true`, layout `"book"`, `future=true`
+- `site.collections.posts=true`, layout `"post"`, `future=true`
+- `site.collections.upcoming=true`, layout `"book"`, `future=true`
+- `site.collections.videos=true`, layout `"book"`, `future=true`
 
-2. **Articles Collection** (`site.collections.articles`)
-   - Enabled: Yes
-   - Layout: "book"
-   - Future posts: Enabled
-   - Contains 67 articles (Markdown with front matter: title, url, pubdate, type, publisher)
-
-3. **Videos Collection** (`site.collections.videos`)
-   - Enabled: Yes
-   - Layout: "book"
-   - Future posts: Enabled
-   - Contains 24+ video pages (HTML) with thumbnails; videos page uses withcarousel layout
-
-4. **Posts Collection** (`site.collections.posts`)
-   - Enabled: Yes
-   - Layout: "post"
-   - Future posts: Enabled
-   - Contains 6 blog posts (Markdown with front matter)
-
-## Templates & Layouts
+## Key Templates and Behavior
 
 ### Layouts
-- **default.html** - Base layout with navbar, footer, and Tailwind CSS (max-w-4xl)
-- **page.html** - Standard page layout with title and content area
-- **post.html** - Blog post layout
-- **booklist.html** - Layout for book/article listings with toggle (max-w-6xl)
-- **withcarousel.html** - Layout for videos page with carousel (max-w-6xl)
+
+- `templates/layouts/default.html`
+  - Base wrapper with navbar/footer
+  - Tailwind CDN
+  - Dark-mode initialization script
+- `templates/layouts/booklist.html`
+  - Used for list-style pages (books/articles)
+  - Includes `toggleHidden()` for hidden book rows
+- `templates/layouts/withcarousel.html`
+  - Used on pages that include richer list/carousel behavior
+- `templates/layouts/post.html`
+  - Blog post layout + metadata section
 
 ### Partials
-- **navbar.html** - Navigation: Upcoming, Videos, Books, Articles, Blog, Gallery, About
-- **footer.html** - Footer with copyright and "Built with Roq" attribution
 
-## Features
+- `templates/partials/navbar.html`
+  - Desktop nav (`md:flex`)
+  - Mobile hamburger + toggleable mobile panel (`md:hidden`)
+- `templates/partials/footer.html`
+  - Copyright + Roq attribution
 
-### Content Management
-- **Markdown Support** - Books, articles, and posts use Markdown with front matter
-- **Front Matter** - YAML metadata for pages (title, description, layout, url, pubdate, etc.)
-- **Collections** - Books, articles, videos, posts (all enabled)
-- **Tagging** - Blog post tagging support via plugin
+### Main Page-Specific Logic
 
-### UI Features
-- **Dark Mode Support** - Theme toggle with localStorage persistence
-- **Responsive Design** - Mobile-friendly layouts using Tailwind CSS
-- **Image Gallery** - Photo gallery with hover effects
-- **Show/Hide Toggle** - Interactive controls for book/video listings
+- `content/index.html`
+  - Home hero is now a 3-image auto-advancing carousel:
+    - `/images/main/another-place.jpg`
+    - `/images/main/devoxx2019.jpg`
+    - `/images/main/bje_still_optimizing_java.png`
+  - Includes prev/next controls, dots, keyboard arrows, swipe support, pause-on-hover/touch
+  - Uses fixed `aspect-video` viewport with `object-cover` cropping
 
-### Build & Deployment
-- **JVM Mode** - Standard Java application
-- **Native Executable** - GraalVM native image support
-- **Docker Support** - Multiple Dockerfiles for different deployment scenarios:
-  - `Dockerfile.jvm` - JVM mode container
-  - `Dockerfile.native` - Native executable container
-  - `Dockerfile.legacy-jar` - Legacy uber-jar container
-  - `Dockerfile.native-micro` - Native micro container
+- `content/upcoming.html`
+  - Renders all upcoming items in a 3-column row layout
+  - Applies **client-side filtering**: only show events where:
+    - `published: true`
+    - `pubdate` is in the future
+  - Includes empty-state message
+  - Includes debug mode via query param:
+    - `/upcoming?debugUpcoming=1`
+    - Shows per-item reason for hidden/visible status
 
-## Configuration
+## Content Status (Current Counts)
 
-### Application Properties (`application.properties`)
-- Books, articles, videos: enabled with layout "book"; future posts enabled
-- Posts: enabled with layout "post"; future posts enabled
+- **Articles**: 103
+- **Books**: 8
+- **Videos**: 27
+- **Posts**: 5
+- **Upcoming**: 4
 
-### Build Configuration (`pom.xml`)
-- Java 21 compiler target
-- Quarkus 3.30.4 platform
-- Integration tests skipped by default (enabled for native profile)
-- Native build profile available
+Notes:
+- Upcoming items currently include `published: true` front matter.
+- A new upcoming item for JNation 2026 exists.
+- A new YouTube Live video item was added.
 
-## Content Overview
+## Deployment
 
-### Books (8 total)
-- Java in a Nutshell (6th, 7th, 8th, 9th editions)
-- Well-Grounded Java (1st, 2nd editions)
-- Optimizing Java
-- Optimizing Cloud-Native Java
+### GitHub Actions (`.github/workflows/deploy.yml`)
 
-### Articles (67 total)
-- Markdown files with front matter; linked to external publishers (InfoQ, O’Reilly, etc.)
+Pipeline:
+1. Checkout code
+2. Build static site using `quarkiverse/quarkus-roq@v1`
+3. Copy `netlify.toml` into `target/roq/`
+4. Upload artifact
+5. Download artifact in deploy job
+6. Deploy `./site` to Netlify using `nwtgck/actions-netlify@v3`
 
-### Videos (24+ total)
-- HTML pages with thumbnails; topics include Observability, Java in Containers, Optimizing Java, JVM, Devoxx talks, etc.
+Secrets required:
+- `NETLIFY_AUTH_TOKEN`
+- `NETLIFY_SITE_ID` (must be Netlify **API Site ID**)
 
-### Posts (6 total)
-- Blog posts in Markdown (e.g. welcome post, Java Reconsidered, Well-Grounded Java 2e, advice for developers, cryptocurrency).
+### Netlify config (`netlify.toml`)
 
-### Pages
-- Home (index.html), About, Books listing, Articles listing, Videos listing, Posts (blog), Gallery, 404
+- Explicit fail command to prevent accidental Netlify-side builds:
+  - `command = "echo 'Build runs on GitHub Actions, not Netlify' && exit 1"`
+- Pretty URLs enabled
+- Custom 404 redirect to `/404/index.html`
+- Security headers:
+  - `X-Frame-Options: DENY`
+  - `X-Content-Type-Options: nosniff`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+- Cache headers:
+  - `/static/*`: 1 year, immutable
+  - `/images/*`: 30 days
 
-## Development Workflow
+## Development Commands
 
-### Running in Dev Mode
+### Dev mode
+
 ```bash
 ./mvnw quarkus:dev
 ```
-- Enables live coding
-- Dev UI available at `http://localhost:8080/q/dev/`
 
-### Building
+### Build site
+
 ```bash
 ./mvnw package
 ```
-- Produces `quarkus-run.jar` in `target/quarkus-app/`
-- Dependencies in `target/quarkus-app/lib/`
-
-### Native Build
-```bash
-./mvnw package -Dnative
-```
-- Creates native executable
-- Container build option available: `-Dquarkus.native.container-build=true`
-
-## Data Files
-
-### Authors (`data/authors.yml`)
-- Contains author profile for "ben" (Ben Evans)
-- Includes name, job, nickname (kittylyst), profile, avatar, bio
-- Used for blog post attribution
-
-## Static Assets
-
-### Images
-- **Book covers** - 8 book cover images
-- **Gallery photos** - 30+ personal photos in `images/main/`
-- **Video thumbnails** - Video preview images
-- **Site assets** - Favicon, logo, site icon
-
-## Current State
-
-- **Java Source Code**: `Extensions.java`, `QuteTest.java` in `src/main/java/roq/kittylyst/`
-- **Content**: Books (8), articles (67), videos (24+), posts (6), gallery; all collections enabled
-- **Templates**: Layouts (default, page, post, booklist, withcarousel), partials, tags
-- **Build System**: Fully configured Maven project
-- **Deployment**: Docker configurations ready for multiple deployment modes
 
 ## Notes
 
-- The project uses Roq, a Java-based SSG built on Quarkus
-- Tailwind CSS is loaded via CDN (not bundled)
-- Theme switching uses localStorage for persistence
-- All four collections (books, articles, videos, posts) are enabled
-- Personal portfolio site for Ben Evans (kittylyst)
+- Content files in collection folders are front matter + HTML fragments (or plain text for some videos).
+- Recent cleanup fixed invalid paragraph markup in books/posts/upcoming documents.
+- The site is actively maintained and no longer reflects earlier gallery/draft assumptions from the initial migration phase.
 

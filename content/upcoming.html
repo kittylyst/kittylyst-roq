@@ -5,20 +5,87 @@ description: |
   Videos, streams, podcasts and Ben in-person
 ---
 
-<div class="grid grid-cols-3 gap-x-6 gap-y-0">
+<div id="upcoming-list">
     {#let today = now.format('yyyy-MM-dd')}
     {#for item in site.collections.upcoming.sortBy("pubdate", false).orEmpty}
     {#if item.data.pubdate > today}
-    <div class="pt-6 pb-6"><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
-    <a href="{item.data.related-url}" target="_blank"><div class="pt-6 pb-6">
-        <div><b>{item.title}</b></div>
-        <div>{item.data.pubdate}</div>
-        <div>{item.data.publisher}</div>
-    </div></a>
-    <div class="pt-6 pb-6">
-        {item.content.raw}
+    {#if item.data.published ?: false}
+    <div class="upcoming-item grid grid-cols-3 gap-x-6 gap-y-0 border-b border-gray-200"
+         data-pubdate="{item.data.pubdate}"
+         data-published="{item.data.published ?: false}">
+        <div class="pt-6 pb-6"><a href="{item.data.related-url}" target="_blank"><img src="{item.image}" width="328"/></a></div>
+        <a href="{item.data.related-url}" target="_blank"><div class="pt-6 pb-6">
+            <div><b>{item.title}</b></div>
+            <div>{item.data.pubdate}</div>
+            <div>{item.data.publisher}</div>
+        </div></a>
+        <div class="pt-6 pb-6">
+            {item.content.raw}
+        </div>
     </div>
-    {#if item_hasNext}<div class="col-span-3 border-b border-gray-200"></div>{/if}
+    {/if}
     {/if}
     {/for}
 </div>
+
+<p id="upcoming-empty" class="hidden text-gray-500 mt-6">No upcoming published events right now.</p>
+<pre id="upcoming-debug" class="hidden mt-6 p-4 text-xs text-gray-700 bg-gray-50 border border-gray-200 rounded overflow-x-auto"></pre>
+
+<script>
+    (function() {
+        const items = document.querySelectorAll('.upcoming-item');
+        const emptyState = document.getElementById('upcoming-empty');
+        const debugOutput = document.getElementById('upcoming-debug');
+        const debugEnabled = new URLSearchParams(window.location.search).get('debugUpcoming') === '1';
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let visibleCount = 0;
+        const debugLines = [];
+
+        items.forEach(function(item) {
+            const pubdate = item.dataset.pubdate || '';
+            const published = (item.dataset.published || '').toLowerCase() === 'true';
+            const eventDate = new Date(pubdate + 'T00:00:00');
+            const isFuture = !isNaN(eventDate.getTime()) && eventDate > today;
+            const shouldShow = published && isFuture;
+            const titleNode = item.querySelector('b');
+            const title = titleNode ? titleNode.textContent.trim() : '(untitled)';
+
+            let reason = 'visible';
+            if (!published && !isFuture) {
+                reason = 'hidden: unpublished and not future-dated';
+            } else if (!published) {
+                reason = 'hidden: published != true';
+            } else if (!isFuture) {
+                reason = 'hidden: pubdate is not in the future';
+            }
+
+            if (shouldShow) {
+                item.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                item.classList.add('hidden');
+            }
+
+            if (debugEnabled) {
+                debugLines.push(
+                    title + ' | pubdate=' + pubdate + ' | published=' + published + ' | ' + reason
+                );
+            }
+        });
+
+        if (emptyState) {
+            emptyState.classList.toggle('hidden', visibleCount > 0);
+        }
+
+        if (debugEnabled && debugOutput) {
+            debugOutput.classList.remove('hidden');
+            debugOutput.textContent =
+                'Debug mode enabled (?debugUpcoming=1)\n' +
+                'today=' + today.toISOString().slice(0, 10) + '\n' +
+                'visible=' + visibleCount + '/' + items.length + '\n\n' +
+                debugLines.join('\n');
+            console.debug('[upcoming-debug]\n' + debugOutput.textContent);
+        }
+    })();
+</script>
