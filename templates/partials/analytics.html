@@ -1,0 +1,73 @@
+<script>
+  (function() {
+    const GA_ID = 'G-1W2S3PC4K5';
+    const PROD_HOSTS = ['kittylyst.com', 'www.kittylyst.com'];
+
+    if (!PROD_HOSTS.includes(window.location.hostname)) {
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+    gtag('config', GA_ID, {
+      anonymize_ip: true
+    });
+
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(gaScript);
+
+    function track(eventName, params) {
+      if (typeof window.gtag !== 'function') return;
+      window.gtag('event', eventName, params || {});
+    }
+
+    // Track outbound links globally.
+    document.addEventListener('click', function(event) {
+      const link = event.target.closest('a[href]');
+      if (!link) return;
+
+      let url;
+      try {
+        url = new URL(link.href, window.location.origin);
+      } catch (e) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) {
+        track('outbound_click', {
+          link_url: url.href,
+          link_host: url.hostname,
+          link_text: (link.textContent || '').trim().slice(0, 120)
+        });
+      }
+    });
+
+    // Track key carousel interactions used across the site.
+    document.addEventListener('click', function(event) {
+      const target = event.target.closest('#hero-prev, #hero-next, #prevBtn, #nextBtn, #hero-dots button, #indicators button');
+      if (!target) return;
+
+      const label = target.id || target.getAttribute('aria-label') || 'carousel-control';
+      track('carousel_interaction', {
+        control: label
+      });
+    });
+
+    // Track upcoming filter result after client-side filter runs.
+    window.addEventListener('load', function() {
+      const upcomingItems = document.querySelectorAll('.upcoming-item');
+      if (!upcomingItems.length) return;
+
+      const visibleItems = document.querySelectorAll('.upcoming-item:not(.hidden)');
+      track('upcoming_filter_result', {
+        visible_count: visibleItems.length,
+        total_count: upcomingItems.length
+      });
+    });
+  })();
+</script>
