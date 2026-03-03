@@ -9,7 +9,7 @@ description: |
     {#let today = now.format('yyyy-MM-dd')}
     {#for item in site.collections.upcoming.sortBy("pubdate", false).orEmpty}
     {#if item.data.pubdate > today}
-    {#if item.data.published ?: false}
+    {#if item.data.published }
     <div class="upcoming-item grid grid-cols-3 gap-x-6 gap-y-0 border-b border-gray-200"
          data-pubdate="{item.data.pubdate}"
          data-published="{item.data.published ?: false}">
