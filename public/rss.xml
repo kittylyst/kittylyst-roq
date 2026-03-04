@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Ben Evans (kittylyst)</title>
+    <link>https://kittylyst.com/</link>
+    <description>Blog posts from Ben Evans</description>
+    <language>en</language>
+
+    <item>
+      <title>How I built this site</title>
+      <link>https://kittylyst.com/posts/2026-02-15-how-i-built-this-site</link>
+      <guid isPermaLink="true">https://kittylyst.com/posts/2026-02-15-how-i-built-this-site</guid>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[A quick tour through the technologies and approaches I used to build my site.]]></description>
+    </item>
+
+    <item>
+      <title>New Blog, Who Dis?</title>
+      <link>https://kittylyst.com/posts/2026-02-12-new-blog-who-dis</link>
+      <guid isPermaLink="true">https://kittylyst.com/posts/2026-02-12-new-blog-who-dis</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Welcome to the first post on my new blog!]]></description>
+    </item>
+
+    <item>
+      <title>The Well Grounded Java Developer 2nd Edition Has Been Published</title>
+      <link>https://kittylyst.com/posts/2022-11-20-well-grounded-java-developer-2nd-edition</link>
+      <guid isPermaLink="true">https://kittylyst.com/posts/2022-11-20-well-grounded-java-developer-2nd-edition</guid>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      <description><![CDATA[A big announcement today - the 2nd Edition of my very first book, "The Well-Grounded Java Developer" has been published.]]></description>
+    </item>
+
+    <item>
+      <title>Advice For Young Developers</title>
+      <link>https://kittylyst.com/posts/2022-09-04-advice-for-young-developers</link>
+      <guid isPermaLink="true">https://kittylyst.com/posts/2022-09-04-advice-for-young-developers</guid>
+      <pubDate>Sun, 04 Sep 2022 00:00:00 +0000</pubDate>
+      <description><![CDATA[This post collects some of my thoughts about what skills a good entry-level developer needs, and the transition into being a professional software developer.]]></description>
+    </item>
+  </channel>
+</rss>
