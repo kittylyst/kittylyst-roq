@@ -5,5 +5,6 @@ url: https://www.oracle.com/a/ocom/docs/corporate/java-magazine-mar-apr-2018.pdf
 pubdate: 2018-05-01
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, jit, hotspot]
 featured: true
 ---

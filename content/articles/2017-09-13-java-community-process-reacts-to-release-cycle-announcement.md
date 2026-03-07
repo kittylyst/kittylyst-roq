@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2017/09/JCPReacts6Month/
 pubdate: 2017-09-13
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, release, release-cycle, community]
 featured: true
 ---

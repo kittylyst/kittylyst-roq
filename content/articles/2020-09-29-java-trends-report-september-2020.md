@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/java-jvm-trends-2020/
 pubdate: 2020-09-29
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, trends]
 featured: true
 ---

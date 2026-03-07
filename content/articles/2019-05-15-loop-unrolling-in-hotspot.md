@@ -5,5 +5,6 @@ url: https://blogs.oracle.com/javamagazine/loop-unrolling
 pubdate: 2019-05-15
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, hotspot]
 featured: true
 ---

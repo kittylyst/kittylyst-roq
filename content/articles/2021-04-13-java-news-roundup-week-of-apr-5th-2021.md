@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2021/04/java-news-roundup-apr05-2021/
 pubdate: 2021-04-13
 type: News article
 publisher: InfoQ
+tags: [java, news, infoq, roundup]
 featured: true
 ---

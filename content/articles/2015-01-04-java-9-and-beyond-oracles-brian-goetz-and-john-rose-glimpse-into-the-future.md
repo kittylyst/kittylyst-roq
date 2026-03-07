@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/Java-9-and-Beyond-Goetz-Rose-Interview/
 pubdate: 2015-01-04
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-9, platform]
 featured: true
 ---

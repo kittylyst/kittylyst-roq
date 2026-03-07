@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/09/java11-released/
 pubdate: 2018-09-01
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-11, release]
 featured: true
 ---

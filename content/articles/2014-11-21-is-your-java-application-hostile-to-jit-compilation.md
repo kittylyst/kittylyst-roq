@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/Java-Application-Hostile-to-JIT-Compilation/
 pubdate: 2014-11-21
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, jit]
 featured: true
 ---

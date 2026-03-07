@@ -5,5 +5,6 @@ url: https://blogs.oracle.com/javamagazine/post/real-world-bytecode-handling-wit
 pubdate: 2020-08-01
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, bytecode, jvm-internals, asm]
 featured: true
 ---

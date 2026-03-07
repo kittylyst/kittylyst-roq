@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2015/12/Java9Delayed/
 pubdate: 2015-12-01
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-9, platform]
 featured: true
 ---

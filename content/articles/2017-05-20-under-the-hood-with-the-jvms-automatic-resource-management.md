@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/Finalize-Exiting-Java/
 pubdate: 2017-05-20
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, platform]
 featured: true
 ---

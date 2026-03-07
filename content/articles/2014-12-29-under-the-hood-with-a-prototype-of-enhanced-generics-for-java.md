@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2014/12/Java10EnhancedGenerics/
 pubdate: 2014-12-29
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-10, generics, language-features]
 featured: true
 ---

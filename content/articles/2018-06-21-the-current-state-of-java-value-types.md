@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/06/JavaValuesJun18/
 pubdate: 2018-06-21
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, value-types, valhalla, language-features]
 featured: true
 ---

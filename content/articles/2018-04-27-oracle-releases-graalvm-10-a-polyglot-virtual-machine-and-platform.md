@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/04/oracle-graalvm-v1/
 pubdate: 2018-04-27
 type: Technical article
 publisher: InfoQ
+tags: [technical-article, infoq, graalvm, release]
 featured: true
 ---

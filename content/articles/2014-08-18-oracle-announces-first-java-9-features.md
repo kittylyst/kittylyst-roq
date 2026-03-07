@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2014/08/Java9-FirstFeatures/
 pubdate: 2014-08-18
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-9, platform]
 featured: true
 ---

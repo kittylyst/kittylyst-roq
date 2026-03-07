@@ -5,5 +5,6 @@ url: https://www.oracle.com/a/ocom/docs/corporate/java-magazine-nov-dec-2017.pdf
 pubdate: 2017-11-01
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, invokedynamic, jvm-internals]
 featured: true
 ---

@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/Attack-50ft-Blockchain-Review/
 pubdate: 2018-03-22
 type: Technical article
 publisher: InfoQ
+tags: [technical-article, infoq, blockchain]
 featured: true
 ---

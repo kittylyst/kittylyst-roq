@@ -5,5 +5,6 @@ url: https://blogs.oracle.com/javamagazine/post/path-files-input-output
 pubdate: 2021-09-08
 type: Magazine article
 publisher: Oracle
+tags: [java, magazine-article, oracle, nio]
 featured: true
 ---
