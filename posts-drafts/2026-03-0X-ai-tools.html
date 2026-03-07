@@ -1,0 +1,87 @@
+---
+title: AI tools
+description: AI tools
+image: posts/library-book-stacks.jpg
+layout: post
+pubdate: 2026-02-14
+tags: [ai]
+author: kittylyst
+draft: true
+---
+
+<p>In general, I regard myself as
+    "on-the-fence" regarding AI coding tools. I can see benefit in the tools, in a number of use cases, and both
+    the capability and the range of applicability is both improving. However, to date, I have not personally encountered
+    the transformative "end of human coding" experience that some others experience. I still encounter fairly hard
+    limitations on a cadence between weekly and daily.</p>
+<p>My primary tools are Perplexity and Cursor.</p>
+<p>I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market
+    experience, not the enthusiast / hobbyist case. </p>
+<p><a href="https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/" target="_blank">Matt's
+    take on it is amusing</a>  </p>
+<p>Here is my side of the conversation, broken up into the edit chunks. These broadly correspond to the site's
+    commit history, which you can see <a href="" target="_blank">here</a>, starting from the </p>
+<ul>
+    <li>Reread project</li>
+    <li>Look at the blog component (content in content/posts). Match visual style with the other components
+    A couple of blog posts still have Markdown section headers. Convert to HTML and style appropriately
+    Examine posts by "Ben Evans" on infoq.com - find missing entries starting in Dec 2022 and create new files in the content/articles/ directory containg appropriate metadata.
+    Not all gaps appear to have been filled. Try again, using https://www.infoq.com/profile/Ben-Evans/#allActivity as a base
+    Some are still missing, from Nov 2024 onwards
+    I'm going to provide titles for the articles
+    TornadoVM 2.0 Brings Automatic GPU Acceleration and LLM Support to Java
+    Running Java on iOS: Gluon Introduces OpenJDK Mobile Resources and Automated Build Pipelines
+    Post-Quantum Cryptography in Java
+</ul>
+<ul>
+    New task. Reread project.
+    To deploy this site, we will be using Netlify. We need to modify .github/workflows/deploy.yml
+    Examine the files in public/images and reduce the quality of all files larger than 2M in size, by reducing the image size and/or dpi. The target file size is under 1.5M.
+    The build stage of the static files should take place on GH, because Netlify does not have the Quarkus runtime available on its deployment servers. Only the contents of target/roq should be used for the deploy.
+</ul>
+<ul>
+    New task.
+    Describe possible conflicts between GH actions and the TOML file
+    Yes. Option A
+    Option A was the correct solution.
+</ul>
+<ul>
+    New task.
+    For both Upcoming and Books, the descriptions on my display (Safari on 2024 MBAir) lack distinctive spacing/divider of some sort, so they end up looking like one long description.
+    Another way to look at is that the spacing between paragraphs in a single description appears to be the same as the spacing between descriptions.
+    The visual dividers are verically uneven. The divider should stretch across all 3 cells in a row at the same height.
+    Fixed. End task.
+</ul>
+<p>At this point, a fairly large amount of external editing occurred.</p>
+<ul>
+    Reread the project.
+    The HTML files under the subdirs of content/ contain FrontMatter metadata followed by an HTML fragment. Is the HTML valid in each file (apart from being only a fragment)? Report any invalid files and suggest fixes.
+    The navigation is not rendering on iPhone. What could be causing that?
+    Implement Option 1
+    Alter the home page to include a carousel of images that auto-advance. Include the current main image as one possibility and include devoxx2019.jpg and bje_still_optimizing_java.png
+    Add those features.
+    Add keyboard support, constrain image sizes to be the same height as "Another Place" (and crop to the left & right) to achieve the same width
+</ul>
+<ul>
+    New task.
+    Examine upcoming.html and describe it
+    Modify so it only shows future-dated events.
+    Add an upcoming event for my appearance at JNation 2026 (https://jnation.pt)
+    Add a client side filter for upcoming events - only future-dated and published: true events should be shown
+    Add debug mode
+    Patch docs/PROJECT_SUMMARY.md to reflect current status
+    Last change appears to have removed build-time filtering. Has it?
+    Use both build-time and client-side filtering.
+</ul>
+<ul>
+    Draft a plan for adding Google Analytics to the site.
+    Broad scope, no consent banner. Only load in production. Implement, prompting me if there are any unanswered questions that need decisions.
+    Main production hostname: kittylyst.com
+    Add the www domain as well
+</ul>
+<ul>
+    <li>New task: Add RSS feed.</li>
+    <li>Automate regeneration</li>
+    <li>Hook into Maven</li>
+</ul>
+<p>IntelliJ integration news</p>
