@@ -14,7 +14,7 @@ draft: true
     the capability and the range of applicability is both improving. However, to date, I have not personally encountered
     the transformative "end of human coding" experience that some others experience. I still encounter fairly hard
     limitations on a cadence between weekly and daily.</p>
-<p>My primary tools are Perplexity and Cursor.</p>
+<p>My primary tools are Perplexity and Cursor. Perplexity is a </p>
 <p>I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market
     experience, not the enthusiast / hobbyist case. </p>
 <p><a href="https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/" target="_blank">Matt's
@@ -23,61 +23,68 @@ draft: true
     commit history, which you can see <a href="" target="_blank">here</a>, starting from the </p>
 <ul>
     <li>Reread project</li>
-    <li>Look at the blog component (content in content/posts). Match visual style with the other components
-    A couple of blog posts still have Markdown section headers. Convert to HTML and style appropriately
-    Examine posts by "Ben Evans" on infoq.com - find missing entries starting in Dec 2022 and create new files in the content/articles/ directory containg appropriate metadata.
-    Not all gaps appear to have been filled. Try again, using https://www.infoq.com/profile/Ben-Evans/#allActivity as a base
-    Some are still missing, from Nov 2024 onwards
-    I'm going to provide titles for the articles
-    TornadoVM 2.0 Brings Automatic GPU Acceleration and LLM Support to Java
-    Running Java on iOS: Gluon Introduces OpenJDK Mobile Resources and Automated Build Pipelines
-    Post-Quantum Cryptography in Java
+    <li>Look at the blog component (content in content/posts). Match visual style with the other components</li>
+    <li>A couple of blog posts still have Markdown section headers. Convert to HTML and style appropriately</li>
+    <li>Examine posts by "Ben Evans" on infoq.com - find missing entries starting in Dec 2022 and create new files in
+        the content/articles/ directory containg appropriate metadata.</li>
+    <li>Not all gaps appear to have been filled. Try again, using https://www.infoq.com/profile/Ben-Evans/#allActivity
+        as a base</li>
+    <li>Some are still missing, from Nov 2024 onwards</li>
+    <li>(Cursor failed again at this point and gave up, asking me for more direct instructions)</li>
+    <li>I'm going to provide titles for the articles</li>
+    <li>TornadoVM 2.0 Brings Automatic GPU Acceleration and LLM Support to Java</li>
+    <li>Running Java on iOS: Gluon Introduces OpenJDK Mobile Resources and Automated Build Pipelines</li>
+    <li>Post-Quantum Cryptography in Java</li>
 </ul>
 <ul>
-    New task. Reread project.
-    To deploy this site, we will be using Netlify. We need to modify .github/workflows/deploy.yml
-    Examine the files in public/images and reduce the quality of all files larger than 2M in size, by reducing the image size and/or dpi. The target file size is under 1.5M.
-    The build stage of the static files should take place on GH, because Netlify does not have the Quarkus runtime available on its deployment servers. Only the contents of target/roq should be used for the deploy.
+    <li>New task. Reread project.</li>
+    <li>To deploy this site, we will be using Netlify. We need to modify .github/workflows/deploy.yml</li>
+    <li>Examine the files in public/images and reduce the quality of all files larger than 2M in size, by reducing the image size and/or dpi. The target file size is under 1.5M.</li>
+    <li>The build stage of the static files should take place on GH, because Netlify does not have the Quarkus runtime available on its deployment servers. Only the contents of target/roq should be used for the deploy.</li>
 </ul>
 <ul>
-    New task.
-    Describe possible conflicts between GH actions and the TOML file
-    Yes. Option A
-    Option A was the correct solution.
+    <li>New task.</li>
+    <li>Describe possible conflicts between GH actions and the TOML file</li>
+    <li>(At this point, Cursor provided several different possible explanations and asked if it should implement a fix based on several options.)</li>
+    <li>Yes. Option A</li>
+    <li>Option A was the correct solution.</li>
 </ul>
 <ul>
-    New task.
-    For both Upcoming and Books, the descriptions on my display (Safari on 2024 MBAir) lack distinctive spacing/divider of some sort, so they end up looking like one long description.
-    Another way to look at is that the spacing between paragraphs in a single description appears to be the same as the spacing between descriptions.
-    The visual dividers are verically uneven. The divider should stretch across all 3 cells in a row at the same height.
-    Fixed. End task.
+    <li>New task.</li>
+    <li>For both Upcoming and Books, the descriptions on my display (Safari on 2024 MBAir) lack distinctive spacing/divider
+        of some sort, so they end up looking like one long description.</li>
+    <li>Another way to look at is that the spacing between paragraphs in a single description appears to be the same as
+        the spacing between descriptions.</li>
+    <li>The visual dividers are verically uneven. The divider should stretch across all 3 cells in a row at the same height.</li>
+    <li>Fixed. End task.</li>
 </ul>
 <p>At this point, a fairly large amount of external editing occurred.</p>
 <ul>
-    Reread the project.
-    The HTML files under the subdirs of content/ contain FrontMatter metadata followed by an HTML fragment. Is the HTML valid in each file (apart from being only a fragment)? Report any invalid files and suggest fixes.
-    The navigation is not rendering on iPhone. What could be causing that?
-    Implement Option 1
-    Alter the home page to include a carousel of images that auto-advance. Include the current main image as one possibility and include devoxx2019.jpg and bje_still_optimizing_java.png
-    Add those features.
-    Add keyboard support, constrain image sizes to be the same height as "Another Place" (and crop to the left & right) to achieve the same width
+    <li>Reread the project.</li>
+    <li>The HTML files under the subdirs of content/ contain FrontMatter metadata followed by an HTML fragment. Is the HTML valid in each file (apart from being only a fragment)? Report any invalid files and suggest fixes.</li>
+    <li>The navigation is not rendering on iPhone. What could be causing that?</li>
+    <li>Implement Option 1</li>
+    <li>Alter the home page to include a carousel of images that auto-advance. Include the current main image as one possibility and include devoxx2019.jpg and bje_still_optimizing_java.png</li>
+    <li>Add those features.</li>
+    <li>Add keyboard support, constrain image sizes to be the same height as "Another Place" (and crop to the left & right) to achieve the same width</li>
 </ul>
 <ul>
-    New task.
-    Examine upcoming.html and describe it
-    Modify so it only shows future-dated events.
-    Add an upcoming event for my appearance at JNation 2026 (https://jnation.pt)
-    Add a client side filter for upcoming events - only future-dated and published: true events should be shown
-    Add debug mode
-    Patch docs/PROJECT_SUMMARY.md to reflect current status
-    Last change appears to have removed build-time filtering. Has it?
-    Use both build-time and client-side filtering.
+    <li>New task.</li>
+    <li>Examine upcoming.html and describe it</li>
+    <li>Modify so it only shows future-dated events.</li>
+    <li>Add an upcoming event for my appearance at JNation 2026 (https://jnation.pt)</li>
+    <li>Add a client side filter for upcoming events - only future-dated and published: true events should be shown</li>
+    <li>Add debug mode</li>
+    <li>Patch docs/PROJECT_SUMMARY.md to reflect current status</li>
+    <li>Last change appears to have removed build-time filtering. Has it?</li>
+    <li>Use both build-time and client-side filtering.</li>
 </ul>
 <ul>
-    Draft a plan for adding Google Analytics to the site.
-    Broad scope, no consent banner. Only load in production. Implement, prompting me if there are any unanswered questions that need decisions.
-    Main production hostname: kittylyst.com
-    Add the www domain as well
+    <li>Draft a plan for adding Google Analytics to the site.</li>
+    <li>Broad scope, no consent banner. Only load in production. Implement, prompting me if there are any unanswered questions that need decisions.</li>
+    <li> (Secrets etc removed) </li>
+    <li>Main production hostname: kittylyst.com</li>
+    <li>Add the www domain as well</li>
 </ul>
 <ul>
     <li>New task: Add RSS feed.</li>
