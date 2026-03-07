@@ -53,6 +53,11 @@
                        target="">Gallery
                     </a>
                 </li>
+                <li>
+                    <a href="/search" data-search-open class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                       target="">Search
+                    </a>
+                </li>
             </div>
         </nav>
 
@@ -66,7 +71,448 @@
                 <a href="/posts" class="block px-3 py-2 text-base font-normal text-gray-500 rounded-md hover:text-gray-900 hover:bg-gray-50">Blog</a>
                 <a href="/about" class="block px-3 py-2 text-base font-normal text-gray-500 rounded-md hover:text-gray-900 hover:bg-gray-50">About</a>
                 <a href="#" class="block px-3 py-2 text-base font-normal text-gray-300 rounded-md">Gallery</a>
+                <a href="/search" data-search-open class="block px-3 py-2 text-base font-normal text-gray-500 rounded-md hover:text-gray-900 hover:bg-gray-50">Search</a>
             </div>
         </div>
     </div>
 </div>
+
+<div id="site-search-overlay" data-search-root data-search-mode="overlay" class="hidden fixed inset-0 z-[100]">
+    <div class="absolute inset-0 bg-black/50" data-search-close></div>
+    <div class="relative mx-auto mt-6 w-[92%] max-w-3xl rounded-lg bg-white shadow-2xl">
+        <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+            <h2 class="text-lg font-semibold text-gray-900">Search by tag</h2>
+            <button type="button" data-search-close class="rounded-md px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Close</button>
+        </div>
+        <div class="p-4">
+            <label class="sr-only" for="site-search-overlay-input">Search tags</label>
+            <input
+                id="site-search-overlay-input"
+                data-search-input
+                type="search"
+                autocomplete="off"
+                placeholder="Type a tag (e.g. java, books, web)"
+                class="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            />
+            <div data-search-tags class="mt-3 flex flex-wrap gap-2"></div>
+            <p data-search-count class="mt-3 text-sm text-gray-600"></p>
+            <ul data-search-results class="mt-3 max-h-[55vh] overflow-y-auto space-y-2"></ul>
+            <p data-search-empty class="mt-3 hidden text-sm text-gray-500">No matching tagged content found.</p>
+            <p class="mt-4 text-xs text-gray-500">
+                Prefer a dedicated page? Use <a href="/search" class="text-blue-600 hover:underline">Search</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="tag-search-dataset" class="hidden" aria-hidden="true">
+    {#for item in site.collections.posts.orEmpty}
+    {#if item.data.tags??}
+    {#let tags = item.data.tags.asStrings}
+    {#if tags.size > 0}
+    <div
+        data-search-record
+        data-title="{item.title}"
+        data-url="{item.data.url ?: item.url}"
+        data-collection="posts"
+        data-pubdate="{item.data.pubdate ?: ''}"
+        data-description="{item.description ?: ''}"
+        data-image="{item.image ?: ''}"
+    >
+        {#for tag in tags}
+        <span data-search-tag>{tag}</span>
+        {/for}
+    </div>
+    {/if}
+    {/let}
+    {/if}
+    {/for}
+
+    {#for item in site.collections.articles.orEmpty}
+    {#if item.data.tags??}
+    {#let tags = item.data.tags.asStrings}
+    {#if tags.size > 0}
+    <div
+        data-search-record
+        data-title="{item.title}"
+        data-url="{item.data.url ?: item.url}"
+        data-collection="articles"
+        data-pubdate="{item.data.pubdate ?: ''}"
+        data-description="{item.description ?: ''}"
+        data-image="{item.image ?: ''}"
+    >
+        {#for tag in tags}
+        <span data-search-tag>{tag}</span>
+        {/for}
+    </div>
+    {/if}
+    {/let}
+    {/if}
+    {/for}
+
+    {#for item in site.collections.books.orEmpty}
+    {#if item.data.tags??}
+    {#let tags = item.data.tags.asStrings}
+    {#if tags.size > 0}
+    <div
+        data-search-record
+        data-title="{item.title}"
+        data-url="{item.data.url ?: item.url}"
+        data-collection="books"
+        data-pubdate="{item.data.pubdate ?: ''}"
+        data-description="{item.description ?: ''}"
+        data-image="{item.image ?: ''}"
+    >
+        {#for tag in tags}
+        <span data-search-tag>{tag}</span>
+        {/for}
+    </div>
+    {/if}
+    {/let}
+    {/if}
+    {/for}
+
+    {#for item in site.collections.videos.orEmpty}
+    {#if item.data.tags??}
+    {#let tags = item.data.tags.asStrings}
+    {#if tags.size > 0}
+    <div
+        data-search-record
+        data-title="{item.title}"
+        data-url="{item.data.url ?: item.url}"
+        data-collection="videos"
+        data-pubdate="{item.data.pubdate ?: ''}"
+        data-description="{item.description ?: ''}"
+        data-image="{item.image ?: ''}"
+    >
+        {#for tag in tags}
+        <span data-search-tag>{tag}</span>
+        {/for}
+    </div>
+    {/if}
+    {/let}
+    {/if}
+    {/for}
+
+    {#for item in site.collections.upcoming.orEmpty}
+    {#if item.data.tags??}
+    {#let tags = item.data.tags.asStrings}
+    {#if tags.size > 0}
+    <div
+        data-search-record
+        data-title="{item.title}"
+        data-url="{item.data.url ?: item.url}"
+        data-collection="upcoming"
+        data-pubdate="{item.data.pubdate ?: ''}"
+        data-description="{item.description ?: ''}"
+        data-image="{item.image ?: ''}"
+    >
+        {#for tag in tags}
+        <span data-search-tag>{tag}</span>
+        {/for}
+    </div>
+    {/if}
+    {/let}
+    {/if}
+    {/for}
+</div>
+
+<script>
+    (function() {
+        function parsePubdate(value) {
+            if (!value) return 0;
+            const date = new Date(value);
+            const time = date.getTime();
+            return Number.isNaN(time) ? 0 : time;
+        }
+
+        function normalize(value) {
+            return (value || '').toString().trim().toLowerCase();
+        }
+
+        function formatCollection(value) {
+            if (!value) return 'content';
+            return value.charAt(0).toUpperCase() + value.slice(1);
+        }
+
+        function buildRecords() {
+            const datasetRoot = document.getElementById('tag-search-dataset');
+            if (!datasetRoot) return [];
+
+            const recordNodes = datasetRoot.querySelectorAll('[data-search-record]');
+            return Array.from(recordNodes).map((node) => {
+                const tags = Array.from(node.querySelectorAll('[data-search-tag]'))
+                    .map((tagNode) => tagNode.textContent.trim())
+                    .filter(Boolean);
+                return {
+                    title: node.dataset.title || 'Untitled',
+                    url: node.dataset.url || '#',
+                    collection: node.dataset.collection || '',
+                    pubdate: node.dataset.pubdate || '',
+                    description: node.dataset.description || '',
+                    image: node.dataset.image || '',
+                    tags: tags
+                };
+            }).filter((record) => record.tags.length > 0);
+        }
+
+        function scoreRecord(record, query, activeTag) {
+            if (!record.tags.length) return -1;
+
+            const normalizedTags = record.tags.map((tag) => normalize(tag));
+            if (activeTag) {
+                const normalizedActiveTag = normalize(activeTag);
+                if (!normalizedTags.includes(normalizedActiveTag)) {
+                    return -1;
+                }
+            }
+
+            if (!query) {
+                return activeTag ? 2 : 1;
+            }
+
+            let best = -1;
+            normalizedTags.forEach((tag) => {
+                if (tag === query) {
+                    best = Math.max(best, 4);
+                } else if (tag.startsWith(query)) {
+                    best = Math.max(best, 3);
+                } else if (tag.includes(query)) {
+                    best = Math.max(best, 2);
+                }
+            });
+            return best;
+        }
+
+        function buildTagCounts(records) {
+            const counts = new Map();
+            records.forEach((record) => {
+                record.tags.forEach((tag) => {
+                    const key = normalize(tag);
+                    if (!key) return;
+                    counts.set(key, (counts.get(key) || 0) + 1);
+                });
+            });
+            return counts;
+        }
+
+        function createResults(records, query, activeTag) {
+            return records
+                .map((record) => ({
+                    record: record,
+                    score: scoreRecord(record, query, activeTag),
+                    dateScore: parsePubdate(record.pubdate)
+                }))
+                .filter((entry) => entry.score >= 0)
+                .sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    if (b.dateScore !== a.dateScore) return b.dateScore - a.dateScore;
+                    return a.record.title.localeCompare(b.record.title);
+                })
+                .map((entry) => entry.record);
+        }
+
+        function initSearchRoot(root, records, topTags) {
+            const input = root.querySelector('[data-search-input]');
+            const tagsContainer = root.querySelector('[data-search-tags]');
+            const resultsContainer = root.querySelector('[data-search-results]');
+            const emptyState = root.querySelector('[data-search-empty]');
+            const countNode = root.querySelector('[data-search-count]');
+
+            if (!input || !tagsContainer || !resultsContainer || !emptyState || !countNode) return null;
+
+            const state = {
+                query: '',
+                activeTag: '',
+                highlightedIndex: -1,
+                results: []
+            };
+
+            function updateCount() {
+                const count = state.results.length;
+                if (!state.query && !state.activeTag) {
+                    countNode.textContent = 'Showing all tagged content (' + count + ')';
+                } else {
+                    countNode.textContent = 'Found ' + count + ' result' + (count === 1 ? '' : 's');
+                }
+            }
+
+            function renderResultItem(item, index) {
+                const li = document.createElement('li');
+                li.className = 'rounded-md border border-gray-200 bg-white hover:border-gray-300';
+
+                const anchor = document.createElement('a');
+                anchor.href = item.url;
+                anchor.className = 'block px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-200';
+                anchor.dataset.searchResult = '1';
+                anchor.dataset.resultIndex = String(index);
+
+                const title = document.createElement('div');
+                title.className = 'font-semibold text-gray-900';
+                title.textContent = item.title;
+                anchor.appendChild(title);
+
+                const meta = document.createElement('div');
+                meta.className = 'mt-1 text-xs text-gray-600';
+                meta.textContent = formatCollection(item.collection) + (item.pubdate ? ' - ' + item.pubdate : '');
+                anchor.appendChild(meta);
+
+                const tagLine = document.createElement('div');
+                tagLine.className = 'mt-1 text-xs text-gray-500';
+                tagLine.textContent = item.tags.map((tag) => '#' + tag).join(' ');
+                anchor.appendChild(tagLine);
+
+                li.appendChild(anchor);
+                resultsContainer.appendChild(li);
+            }
+
+            function renderResults() {
+                const query = normalize(state.query);
+                state.results = createResults(records, query, state.activeTag);
+                resultsContainer.innerHTML = '';
+                state.highlightedIndex = -1;
+                state.results.forEach((item, index) => renderResultItem(item, index));
+                emptyState.classList.toggle('hidden', state.results.length !== 0);
+                updateCount();
+            }
+
+            function renderTagButtons() {
+                tagsContainer.innerHTML = '';
+                topTags.forEach((tagInfo) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'rounded-full border px-2.5 py-1 text-xs transition';
+                    button.textContent = '#' + tagInfo.tag + ' (' + tagInfo.count + ')';
+                    const selected = normalize(state.activeTag) === tagInfo.tag;
+                    if (selected) {
+                        button.className += ' border-gray-800 bg-gray-800 text-white';
+                    } else {
+                        button.className += ' border-gray-300 bg-white text-gray-700 hover:border-gray-500 hover:text-gray-900';
+                    }
+                    button.addEventListener('click', function() {
+                        state.activeTag = selected ? '' : tagInfo.tag;
+                        renderTagButtons();
+                        renderResults();
+                    });
+                    tagsContainer.appendChild(button);
+                });
+            }
+
+            function highlightResult(index) {
+                const links = resultsContainer.querySelectorAll('[data-search-result]');
+                links.forEach((link) => {
+                    link.classList.remove('bg-gray-100');
+                });
+                if (index < 0 || index >= links.length) return;
+                links[index].classList.add('bg-gray-100');
+                links[index].focus();
+            }
+
+            input.addEventListener('input', function() {
+                state.query = input.value;
+                renderResults();
+            });
+
+            input.addEventListener('keydown', function(event) {
+                if (!state.results.length) return;
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    state.highlightedIndex = Math.min(state.highlightedIndex + 1, state.results.length - 1);
+                    highlightResult(state.highlightedIndex);
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    state.highlightedIndex = Math.max(state.highlightedIndex - 1, 0);
+                    highlightResult(state.highlightedIndex);
+                } else if (event.key === 'Enter' && state.highlightedIndex >= 0) {
+                    event.preventDefault();
+                    const result = state.results[state.highlightedIndex];
+                    if (result && result.url) {
+                        window.location.href = result.url;
+                    }
+                }
+            });
+
+            renderTagButtons();
+            renderResults();
+
+            return {
+                focusInput: function() {
+                    input.focus();
+                    input.select();
+                },
+                reset: function() {
+                    state.query = '';
+                    state.activeTag = '';
+                    input.value = '';
+                    renderTagButtons();
+                    renderResults();
+                }
+            };
+        }
+
+        function initSearch() {
+            const records = buildRecords();
+            const tagCounts = buildTagCounts(records);
+            const topTags = Array.from(tagCounts.entries())
+                .map((entry) => ({ tag: entry[0], count: entry[1] }))
+                .sort((a, b) => {
+                    if (b.count !== a.count) return b.count - a.count;
+                    return a.tag.localeCompare(b.tag);
+                })
+                .slice(0, 16);
+
+            const roots = Array.from(document.querySelectorAll('[data-search-root]'));
+            const controllers = roots.map((root) => ({
+                mode: root.dataset.searchMode || 'page',
+                root: root,
+                controller: initSearchRoot(root, records, topTags)
+            })).filter((entry) => entry.controller);
+
+            const overlayEntry = controllers.find((entry) => entry.mode === 'overlay');
+            const overlayRoot = overlayEntry ? overlayEntry.root : null;
+
+            function closeOverlay() {
+                if (!overlayRoot) return;
+                overlayRoot.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+
+            function openOverlay() {
+                if (!overlayRoot) return;
+                overlayRoot.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+                if (overlayEntry && overlayEntry.controller) {
+                    overlayEntry.controller.focusInput();
+                }
+            }
+
+            const openers = document.querySelectorAll('[data-search-open]');
+            openers.forEach((opener) => {
+                opener.addEventListener('click', function(event) {
+                    if (!overlayRoot) return;
+                    event.preventDefault();
+                    openOverlay();
+                });
+            });
+
+            if (overlayRoot) {
+                const closers = overlayRoot.querySelectorAll('[data-search-close]');
+                closers.forEach((closer) => {
+                    closer.addEventListener('click', closeOverlay);
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape' && !overlayRoot.classList.contains('hidden')) {
+                        closeOverlay();
+                    }
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSearch);
+        } else {
+            initSearch();
+        }
+    })();
+</script>
