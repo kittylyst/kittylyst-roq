@@ -5,5 +5,6 @@ url: https://blog.newrelic.com/product-news/java-predictions-2019-ben-evans-reca
 pubdate: 2019-07-17
 type: Blog post
 publisher: New Relic
+tags: [java, blog-post, new-relic, predictions]
 featured: true
 ---

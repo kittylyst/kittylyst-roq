@@ -5,5 +5,6 @@ url: https://foojay.io/today/interview-with-a-java-champion-reflections-on-a-sto
 pubdate: 2024-08-19
 type: Technical article
 publisher: Foojay
+tags: [java, technical-article, community]
 featured: true
 ---

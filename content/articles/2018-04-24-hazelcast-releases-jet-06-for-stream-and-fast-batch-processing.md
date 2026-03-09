@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/04/hazelcast-jet-v06/
 pubdate: 2018-04-24
 type: Technical article
 publisher: InfoQ
+tags: [technical-article, infoq, release, hazelcast]
 featured: true
 ---

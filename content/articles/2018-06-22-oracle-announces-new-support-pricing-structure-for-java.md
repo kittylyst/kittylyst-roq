@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/06/new-support-pricing-java/
 pubdate: 2018-06-22
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, licensing]
 featured: true
 ---

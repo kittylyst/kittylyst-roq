@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/11/red-hat-openjdk-gc-Nov18/
 pubdate: 2018-11-30
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, openjdk, technical-article, infoq, garbage-collection]
 featured: true
 ---

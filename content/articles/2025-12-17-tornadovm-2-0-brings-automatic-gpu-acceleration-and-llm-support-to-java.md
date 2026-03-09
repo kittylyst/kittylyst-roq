@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2025/12/tornadovm-20-gpu-llm/
 pubdate: 2025-12-17
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, tornadovm, gpu, llm]
 featured: true
 ---

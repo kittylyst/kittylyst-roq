@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2024/05/new-relic-java-2024/
 pubdate: 2024-05-23
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, release]
 featured: true
 ---

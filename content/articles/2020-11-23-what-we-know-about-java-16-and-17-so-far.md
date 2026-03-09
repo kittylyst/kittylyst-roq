@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2020/11/java16-so-far/
 pubdate: 2020-11-23
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-16, release]
 featured: true
 ---

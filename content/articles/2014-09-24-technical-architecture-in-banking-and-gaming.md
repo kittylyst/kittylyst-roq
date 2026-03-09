@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/banking-vs-gaming/
 pubdate: 2014-09-24
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, software-architecture, industry]
 featured: true
 ---

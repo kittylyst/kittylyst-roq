@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2019/06/java13-feature-freeze/
 pubdate: 2019-06-17
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-13, platform]
 featured: true
 ---

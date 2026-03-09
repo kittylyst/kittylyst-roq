@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2024/12/java-post-quantum/
 pubdate: 2024-12-09
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, cryptography, post-quantum]
 featured: true
 ---

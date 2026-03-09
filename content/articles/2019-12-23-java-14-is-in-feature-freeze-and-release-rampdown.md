@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2019/12/java14-feature-freeze/
 pubdate: 2019-12-23
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-14, release]
 featured: true
 ---

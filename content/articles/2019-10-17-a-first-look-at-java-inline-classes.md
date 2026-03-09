@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/inline-classes-java/
 pubdate: 2019-10-17
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, value-types, valhalla, language-features]
 featured: true
 ---

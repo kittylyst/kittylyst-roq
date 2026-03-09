@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/04/oracle-kills-java-one/
 pubdate: 2018-04-20
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, repl]
 featured: true
 ---

@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/01/JavaSupportJan18/
 pubdate: 2018-01-30
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, licensing]
 featured: true
 ---

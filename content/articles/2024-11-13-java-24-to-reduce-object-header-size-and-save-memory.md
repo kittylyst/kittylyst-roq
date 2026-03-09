@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2024/11/compact-headers-java24/
 pubdate: 2024-11-13
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-24, platform]
 featured: true
 ---

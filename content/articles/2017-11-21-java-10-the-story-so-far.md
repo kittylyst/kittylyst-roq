@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2017/11/Java10JEPs/
 pubdate: 2017-11-21
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-10, release]
 featured: true
 ---

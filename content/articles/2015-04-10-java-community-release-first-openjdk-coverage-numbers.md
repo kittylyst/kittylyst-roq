@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2015/04/OpenJDKJCov/
 pubdate: 2015-04-10
 type: Technical article
 publisher: InfoQ
+tags: [java, openjdk, technical-article, infoq, release]
 featured: true
 ---

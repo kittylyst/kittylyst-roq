@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/Graal-Java-JIT-Compiler/
 pubdate: 2018-07-16
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, jit]
 featured: true
 ---

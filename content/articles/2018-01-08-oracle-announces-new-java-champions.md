@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/01/JavaChampions2017/
 pubdate: 2018-01-08
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, community]
 featured: true
 ---

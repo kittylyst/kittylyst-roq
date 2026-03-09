@@ -5,5 +5,6 @@ url: https://www.oracle.com/a/ocom/docs/corporate/java-magazine-may-june-2018.pd
 pubdate: 2018-05-01
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, hotspot]
 featured: true
 ---

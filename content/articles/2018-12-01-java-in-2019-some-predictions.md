@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2018/12/java-2019-predictions/
 pubdate: 2018-12-01
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, predictions]
 featured: true
 ---

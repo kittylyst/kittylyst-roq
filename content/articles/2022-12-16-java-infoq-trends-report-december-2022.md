@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/java-jvm-trends-2022/
 pubdate: 2022-12-16
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, trends]
 featured: true
 ---

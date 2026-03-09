@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2020/03/java14-released/
 pubdate: 2020-03-01
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, java-14, release]
 featured: true
 ---

@@ -5,5 +5,6 @@ url: https://www.infoq.com/articles/understand-classic-java-garbage-collection/
 pubdate: 2020-05-06
 type: Technical article
 publisher: InfoQ
+tags: [java, jvm, technical-article, infoq, garbage-collection, performance]
 featured: true
 ---

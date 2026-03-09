@@ -5,5 +5,6 @@ url: https://developers.redhat.com/articles/2022/04/12/observability-2022-why-it
 pubdate: 2022-04-12
 type: Developer article
 publisher: Red Hat
+tags: [developer-article, red-hat, opentelemetry, observability]
 featured: true
 ---

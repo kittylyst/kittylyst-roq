@@ -5,5 +5,6 @@ url: https://blogs.oracle.com/javamagazine/post/java-nio-nio2-buffers-channels-a
 pubdate: 2022-01-07
 type: Magazine article
 publisher: Oracle
+tags: [java, magazine-article, oracle, nio]
 featured: true
 ---

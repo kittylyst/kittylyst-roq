@@ -5,5 +5,6 @@ url: https://thenewstack.io/new-relics-opentelemetry-and-open-source-commitment/
 pubdate: 2020-12-21
 type: Technical article
 publisher: The New Stack
+tags: [technical-article, the-new-stack, opentelemetry, observability]
 featured: true
 ---

@@ -5,5 +5,6 @@ url: https://www.oracle.com/a/ocom/docs/corporate/java-magazine-nov-dec-2018.pdf
 pubdate: 2018-11-01
 type: Magazine article
 publisher: Oracle
+tags: [java, jvm, magazine-article, oracle, value-types, valhalla, language-features]
 featured: true
 ---

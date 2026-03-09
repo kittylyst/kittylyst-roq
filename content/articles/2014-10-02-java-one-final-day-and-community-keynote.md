@@ -5,5 +5,6 @@ url: https://www.infoq.com/news/2014/10/JavaOne2014CommunityKeynote/
 pubdate: 2014-10-02
 type: Technical article
 publisher: InfoQ
+tags: [java, technical-article, infoq, conference, community]
 featured: true
 ---
