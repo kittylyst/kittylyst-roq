@@ -1,5 +1,5 @@
 ---
-title: AI tools
+title: How I used AI tools to build this site
 description: AI tools
 image: posts/library-book-stacks.jpg
 layout: post
@@ -9,21 +9,28 @@ author: kittylyst
 draft: true
 ---
 
-<p>In general, I regard myself as
-    "on-the-fence" regarding AI coding tools. I can see benefit in the tools, in a number of use cases, and both
-    the capability and the range of applicability is both improving. However, to date, I have not personally encountered
-    the transformative "end of human coding" experience that some others experience. I still encounter fairly hard
-    limitations on a cadence between weekly and daily.</p>
-<p>My primary tools are Perplexity and Cursor. Perplexity is a </p>
-<p>I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market
-    experience, not the enthusiast / hobbyist case. Simon Wardley coined the term "conversational programing" many years
-    ago, and I think that it's a far more useful apt and useful term than many of the others that are used in the space
-    currently, and we should revive it!
-    I talk to the tool as though it is, essentially, the ship's computer on the USS Enterprise.</p>
-<p><a href="https://matduggan.com/i-sold-out-for-200-a-month-and-all-i-got-was-this-perfectly-generated-terraform/" target="_blank">Matt's take on it is amusing</a>
-    and <a href="https://www.beginningwithi.com/2026/03/03/retirement-hobby-built-my-first-app-in-under-a-week/" target="_blank">Deirdre is insightful</a> as well</p>
+<p>This post is intended primarily as an experience report on my use of AI tools - both to build this site and more
+    generally. I have tried to approach my usage of them in a balanced fashion - recognizing that with their increased
+    popularity, I need some familiarity with the tools in order to provide any useful critique. However, I remain deeply
+    unconvinced by the claims of the AI boosters and concerned by the apparent resource consumption involved.</p>
+<p>I can see benefit in the tools, in a number of use cases, and both the capability and the range of applicability are
+    improving somewhat. However, to date, I have not
+    personally encountered the transformative "end of human coding" experience that some others have reported. I still
+    encounter fairly hard limitations of the tools on a cadence between weekly and daily.</p>
+<p>My primary tools on a day-to-day basis are Perplexity and Cursor. Perplexity is effectively a search engine
+    replacement / research tool for me. I regularly check its behaviour by asking it questions that I am an expert in,
+    to see what it spits out - this helps me gauge how useful it is likely to be in areas that I am less familiar with.
+    Thus far, it is a better search / research tool than Google in many use cases, but it is far from perfect. In
+    particular,
+</p>
+<p>I also ask Perplexity leading and deliberately provocative and polarizing questions from private / anonymous sessions. This
+    helps me check what inherent biases it has and whether it is liable to "tell me what I want to hear". Overall, I find
+    that </p>
+<p>I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market industrial
+    experience, not the enthusiast / hobbyist case. I talk to the tool as though it is, essentially, the ship's computer
+    on the USS Enterprise (NCC 1701-D, of course).</p>
 <p>Here is my side of the conversation, broken up into the edit chunks. These broadly correspond to the site's
-    commit history, which you can see <a href="" target="_blank">here</a>, starting from the </p>
+    commit history, which you can see <a href="" target="_blank">here</a>, starting from this commit </p>
 <ul>
     <li>Reread project</li>
     <li>Look at the blog component (content in content/posts). Match visual style with the other components</li>
@@ -33,7 +40,7 @@ draft: true
     <li>Not all gaps appear to have been filled. Try again, using https://www.infoq.com/profile/Ben-Evans/#allActivity
         as a base</li>
     <li>Some are still missing, from Nov 2024 onwards</li>
-    <li>(Cursor failed again at this point and gave up, asking me for more direct instructions)</li>
+    <li>[ Cursor failed again at this point and gave up, asking me for more direct instructions ]</li>
     <li>I'm going to provide titles for the articles</li>
     <li>TornadoVM 2.0 Brings Automatic GPU Acceleration and LLM Support to Java</li>
     <li>Running Java on iOS: Gluon Introduces OpenJDK Mobile Resources and Automated Build Pipelines</li>
@@ -48,7 +55,7 @@ draft: true
 <ul>
     <li>New task.</li>
     <li>Describe possible conflicts between GH actions and the TOML file</li>
-    <li>(At this point, Cursor provided several different possible explanations and asked if it should implement a fix based on several options.)</li>
+    <li>[ At this point, Cursor provided several different possible explanations and asked if it should implement a fix based on several options. ]</li>
     <li>Yes. Option A</li>
     <li>Option A was the correct solution.</li>
 </ul>
@@ -61,7 +68,7 @@ draft: true
     <li>The visual dividers are verically uneven. The divider should stretch across all 3 cells in a row at the same height.</li>
     <li>Fixed. End task.</li>
 </ul>
-<p>At this point, a fairly large amount of external editing occurred.</p>
+<p>[ At this point, a fairly large amount of external editing occurred. ]</p>
 <ul>
     <li>Reread the project.</li>
     <li>The HTML files under the subdirs of content/ contain FrontMatter metadata followed by an HTML fragment. Is the HTML valid in each file (apart from being only a fragment)? Report any invalid files and suggest fixes.</li>
@@ -94,6 +101,27 @@ draft: true
     <li>Automate regeneration</li>
     <li>Hook into Maven</li>
 </ul>
+<p>[ At this point, the LLM introduced a basic Python script with very basic templating, which was exec'd from Maven ]</p>
+<p>This was the point where manual intervention was required - a quick bit of research showed me that Roq has simple,
+    builtin support for RSS, but the language model did not use it - whether due to corpus limitations or some other factor.</p>
+<p>This is an example of the antipattern called <i>Stovepipe Architecture</i>, which LLMs seem particularly prone to - </p>
 <p>IntelliJ integration news - I installed it and, apart from needing to go through a fairly tedious upgrade loop, the
     install process went well, and I'm interested to see whether having the Cursor agent in the IDE will help, or whether
     the enforced context switch when moving from Cursor to manually editing in IntelliJ was helpful.</p>
+<p>does this mean that basically *ANY* new programming language that tries to launch post-LLMs will immediately enter
+    the death spiral because the lack of source material puts them at an insurmountable disadvantage?
+
+    var vs explicit types.
+    New features such as Java FFM
+    Architectural thinking - e.g. refactoring to ADTs
+
+
+    rg vs grep
+    Weird use of tee instead of vi
+    Stacks "fixes" on top of each other.
+    Quickly reach the point where the tower of abstractions is too high.
+    Doesn't actually "know" about real Fedora versions, and where config files are kept.
+    Eventually had to leave LLMNR on, rather than continue to stack arcane efforts (which were not typically rolled back after they failed)
+</p>
+
+
