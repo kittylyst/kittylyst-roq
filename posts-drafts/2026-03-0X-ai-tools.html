@@ -4,7 +4,7 @@ description: AI tools
 image: posts/library-book-stacks.jpg
 layout: post
 pubdate: 2026-02-14
-tags: [ai]
+tags: [ai, tools, programming]
 author: kittylyst
 draft: true
 ---
@@ -14,20 +14,34 @@ draft: true
     popularity, I need some familiarity with the tools in order to provide any useful critique. However, I remain deeply
     unconvinced by the claims of the AI boosters and concerned by the apparent resource consumption involved.</p>
 <p>I can see benefit in the tools, in a number of use cases, and both the capability and the range of applicability are
-    improving somewhat. However, to date, I have not
-    personally encountered the transformative "end of human coding" experience that some others have reported. I still
-    encounter fairly hard limitations of the tools on a cadence between weekly and daily.</p>
-<p>My primary tools on a day-to-day basis are Perplexity and Cursor. Perplexity is effectively a search engine
+    improving somewhat. However, to date, I have not personally encountered the transformative "end of human coding"
+    experience that some others have reported. Perhaps more importantly, I still encounter fairly hard limitations of
+    the tools on a cadence between weekly and daily.</p>
+<p>My primary LLM-based tools on a day-to-day basis are Perplexity and Cursor. Perplexity is effectively a search engine
     replacement / research tool for me. I regularly check its behaviour by asking it questions that I am an expert in,
-    to see what it spits out - this helps me gauge how useful it is likely to be in areas that I am less familiar with.
-    Thus far, it is a better search / research tool than Google in many use cases, but it is far from perfect. In
-    particular,
-</p>
-<p>I also ask Perplexity leading and deliberately provocative and polarizing questions from private / anonymous sessions. This
-    helps me check what inherent biases it has and whether it is liable to "tell me what I want to hear". Overall, I find
-    that </p>
-<p>I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market industrial
-    experience, not the enthusiast / hobbyist case. I talk to the tool as though it is, essentially, the ship's computer
+    to see what it spits out - this helps me gauge how correct / useful it is likely to be in areas that I am less
+    familiar with. Thus far, it is a better search / research tool than Google in many use cases, but it is far from
+    perfect.</p>
+<p>In particular, it has blind spots and occasional strange over-fixations on relatively minor details of a
+    subject. This is entirely what you would expect from a tool derived from a probabilistic model that is based on a corpus of
+    human-written articles that are themselves summarizations of other sources. The fact that Perplexity shows its
+    sources, however, means that I can check the quality of the primary sources directly and draw my own conclusions
+    about any likely blind spots.</p>
+<p>I also ask Perplexity leading and deliberately provocative and polarizing questions. This helps me check what
+    inherent biases it has and whether it is liable to "tell me what I want to hear" or to push a specific political
+    point of view. I do this from private / anonymous sessions so as not to connect those searches with my main (free)
+    account. Perplexity claims to allow the user to choose not to save history, so there is not a profile being built of
+    conversations - but I fundamentally don't trust that claim. There are simply too many examples of information companies
+    violating similar promises when faced with the prospect of lucrative data.</p>
+<p>Overall, at present, Perplexity does seem to be respecting the truth - more or less. It would not produce homophobic
+    conclusions even when questioned in a way designed to provoke them. Direct attempts to trigger homophobia were
+    pushed back, and more subtle approaches were also thwarted. It was somewhat woollier on trans rights, but its primary
+    sources did not include anything specifically transphobic or contrary to established science. The most disappointing
+    set of answers and behaviours were to do with climate change - where it was much softer on the denialist position
+    than the evidence warrants.</p>
+<p></p>
+<p>Moving on, I use Cursor on the default settings. This is quite deliberate, as I am interested in the mass-market industrial
+    experience, not the "enthusiast" / hobbyist case. I talk to the tool as though it is, essentially, the ship's computer
     on the USS Enterprise (NCC 1701-D, of course).</p>
 <p>Here is my side of the conversation, broken up into the edit chunks. These broadly correspond to the site's
     commit history, which you can see <a href="" target="_blank">here</a>, starting from this commit </p>
@@ -105,17 +119,21 @@ draft: true
 <p>This was the point where manual intervention was required - a quick bit of research showed me that Roq has simple,
     builtin support for RSS, but the language model did not use it - whether due to corpus limitations or some other factor.</p>
 <p>This is an example of the antipattern called <i>Stovepipe Architecture</i>, which LLMs seem particularly prone to - </p>
+
 <p>IntelliJ integration news - I installed it and, apart from needing to go through a fairly tedious upgrade loop, the
     install process went well, and I'm interested to see whether having the Cursor agent in the IDE will help, or whether
     the enforced context switch when moving from Cursor to manually editing in IntelliJ was helpful.</p>
 <p>does this mean that basically *ANY* new programming language that tries to launch post-LLMs will immediately enter
     the death spiral because the lack of source material puts them at an insurmountable disadvantage?
 
+    https://www.linkedin.com/posts/simonwardley_x-do-you-think-ai-will-replace-software-share-7443994710555279360-iRzR
+
     var vs explicit types.
     New features such as Java FFM
     Architectural thinking - e.g. refactoring to ADTs
 
 
+    Configuring Fedora on a home NAS
     rg vs grep
     Weird use of tee instead of vi
     Stacks "fixes" on top of each other.
