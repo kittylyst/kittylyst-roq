@@ -1,0 +1,139 @@
+---
+title: How I used AI tools to build this site
+description: AI tools
+image: posts/library-book-stacks.jpg
+layout: post
+pubdate: 2026-03-31
+tags:
+  - ai
+  - tools
+  - programming
+author: kittylyst
+draft: true
+---
+
+<p>This post is intended primarily as an experience report on my use of AI tools - both to build this site and more
+    generally. I have tried to approach my usage of them in a balanced fashion - recognizing that with their increased
+    popularity, I need some familiarity with the tools in order to provide any useful critique. However, I remain deeply
+    unconvinced by the claims of the AI boosters and concerned by the apparent resource consumption involved.</p>
+<p>I can see benefit in the tools, in a number of use cases, and both the capability and the range of applicability are
+    improving somewhat. However, to date, I have not personally encountered the transformative "end of human coding"
+    experience that some others have reported. Perhaps more importantly, I still encounter fairly hard limitations of
+    the tools on a cadence between weekly and daily.</p>
+<p>My primary LLM-based tools on a day-to-day basis are Perplexity and Cursor. Perplexity is effectively a search engine
+    replacement / research tool for me. I regularly check its behaviour by asking it questions that I am an expert in,
+    to see what it spits out - this helps me gauge how correct / useful it is likely to be in areas that I am less
+    familiar with. Thus far, it is a better search / research tool than Google in many use cases, but it is far from
+    perfect.</p>
+<p>In particular, it has blind spots and occasional strange over-fixations on relatively minor details of a
+    subject. This is entirely what you would expect from a tool derived from a probabilistic model that is based on a corpus of
+    human-written articles that are themselves summarizations of other sources. The fact that Perplexity shows its
+    sources, however, means that I can check the quality of the primary sources directly and draw my own conclusions
+    about any likely blind spots.</p>
+<p>Perplexity offers "research mode" and possibly other pay-for options. I have observed no difference whatsoever from
+    the free trials of these advanced options over the basic free account, and so I haven't paid for them.</p>
+<p>I also ask Perplexity leading and deliberately provocative and polarizing questions. This helps me check what
+    inherent biases it has and whether it is liable to "tell me what I want to hear" or to push a specific political
+    point of view. I do this from private / anonymous sessions so as not to connect those searches with my main (free)
+    account. Perplexity claims to allow the user to choose not to save history, so there is not a profile being built of
+    conversations - but I fundamentally don't trust that claim. There are simply too many examples of information companies
+    violating similar promises when faced with the prospect of lucrative data.</p>
+<p>Overall, at present, Perplexity does seem to be respecting reality - more or less. It would not produce homophobic
+    conclusions even when questioned in a way designed to provoke them. Direct attempts to trigger homophobia were
+    pushed back, and more subtle approaches were also thwarted. It was somewhat woollier on trans rights, but its primary
+    sources did not include anything specifically transphobic or contrary to established science. The most disappointing
+    set of answers and behaviours were to do with climate change - where it was much softer on denialism
+    than the evidence warrants. This is concerning and something that I would like to see an explanation for.</p>
+<p>Moving on, I use Cursor on the default settings, on a $20 / month plan (which seems to be the minimum to get a decent sense of what the tools can do). This is quite deliberate, as I am interested in the mass-market industrial
+    experience, not the "enthusiast" / hobbyist case. I talk to the tool as though it is, essentially, the ship's computer
+    on the USS Enterprise (NCC 1701-D, of course) - I am not interested in anthropomorphizing a software stack simply
+    because it has a conversational interface.</p>
+<p>Here is my side of the conversation, broken up into chunks corresponding to edit tasks. These broadly correspond to the site's commit history, <a href="https://github.com/kittylyst/kittylyst-roq/commit/99dbe68e5bea9495c7d76435652ca5998c7663d0" target="_blank">starting
+        from this commit</a>.</p>
+<ul>
+    <li>Reread project</li>
+    <li>Look at the blog component (content in content/posts). Match visual style with the other components</li>
+    <li>A couple of blog posts still have Markdown section headers. Convert to HTML and style appropriately</li>
+    <li>Examine posts by "Ben Evans" on infoq.com - find missing entries starting in Dec 2022 and create new files in
+        the content/articles/ directory containg appropriate metadata.</li>
+    <li>Not all gaps appear to have been filled. Try again, using https://www.infoq.com/profile/Ben-Evans/#allActivity
+        as a base</li>
+    <li>Some are still missing, from Nov 2024 onwards</li>
+    <li><i>[ Cursor failed again at this point and gave up, asking me for more direct instructions ]</i></li>
+    <li>I'm going to provide titles for the missing articles</li>
+    <li>TornadoVM 2.0 Brings Automatic GPU Acceleration and LLM Support to Java</li>
+    <li>Running Java on iOS: Gluon Introduces OpenJDK Mobile Resources and Automated Build Pipelines</li>
+    <li>Post-Quantum Cryptography in Java</li>
+</ul>
+<p>At this point, I had a more-or-less complete set of my articles and other resources migrated over from the old Gatsby site. Some manual tweaking was required but not a great amount. Time to get it into some sort of deployable shape.</p>
+<br/>
+<ul>
+    <li>To deploy this site, we will be using Netlify. We need to modify .github/workflows/deploy.yml</li>
+    <li>Examine the files in public/images and reduce the quality of all files larger than 2M in size, by reducing the image size and/or dpi. The target file size is under 1.5M.</li>
+    <li>The build stage of the static files should take place on GH, because Netlify does not have the Quarkus runtime available on its deployment servers. Only the contents of target/roq should be used for the deploy.</li>
+</ul>
+<p>The instructions regarding the images were forwarded to <a href="https://til.simonwillison.net/macos/sips" target="_blank">sips</a> to achieve the desired constraints, which worked.
+    On the other hand, the GH action the model had created did not deploy.</p>
+<ul>
+    <li>Describe possible conflicts between GH actions and the TOML file</li>
+    <li><i>[ At this point, Cursor provided several different possible explanations and asked if it should implement a fix based on several options. ]</i></li>
+    <li>Yes. Option A</li>
+</ul>
+<p><a href="https://github.com/kittylyst/kittylyst-roq/commit/03a55f1c6506df62fa4691ca9e34ee3da042e48d" target="_blank">At this point</a>, we had a basically deployable site and could move into staging. It had taken roughly 4 or 5 hours of actual conversation time to get this far, over 3-4 days. However, we weren't live yet.</p>
+<br/>
+<ul>
+    <li>For both Upcoming and Books, the descriptions on my display lack distinctive spacing/divider
+        of some sort, so they end up looking like one long description.</li>
+    <li>Another way to look at is that the spacing between paragraphs in a single description appears to be the same as
+        the spacing between descriptions.</li>
+    <li>The visual dividers are verically uneven. The divider should stretch across all 3 cells in a row at the same height.</li>
+    <li>Fixed. End task.</li>
+</ul>
+<p><i>[ At this point, a fairly large amount of external manual editing occurred. ]</i></p>
+<ul>
+    <li>Reread the project.</li>
+    <li>The HTML files under the subdirs of content/ contain FrontMatter metadata followed by an HTML fragment. Is the HTML valid in each file (apart from being only a fragment)? Report any invalid files and suggest fixes.</li>
+    <li>The navigation is not rendering on iPhone. What could be causing that?</li>
+    <li>Implement Option 1</li>
+    <li>Alter the home page to include a carousel of images that auto-advance. Include the current main image as one possibility and include devoxx2019.jpg and bje_still_optimizing_java.png</li>
+    <li>Add those features.</li>
+    <li>Add keyboard support, constrain image sizes to be the same height as "Another Place" (and crop to the left & right) to achieve the same width</li>
+</ul>
+<p>Again, my intent here was to be descriptive at a high-level and not telling the AI precisely what it needed to do. There was a deliberate element of finding out "how vague can I be?" throughout this process. This works for me, because I know how to fall back to being more precise, and am aware of when the model gets off track. I am unconvinced that this would be as effective for a less experienced developer.</p>
+<ul>
+    <li>Examine upcoming.html and describe it</li>
+    <li>Modify so it only shows future-dated events.</li>
+    <li>Add an upcoming event for my appearance at JNation 2026 (https://jnation.pt)</li>
+    <li>Add a client side filter for upcoming events - only future-dated and published: true events should be shown</li>
+    <li>Add debug mode</li>
+    <li>Patch docs/PROJECT_SUMMARY.md to reflect current status</li>
+    <li>Last change appears to have removed build-time filtering. Has it?</li>
+    <li>Use both build-time and client-side filtering.</li>
+</ul>
+<p>At this point, we were live and I put the website project on hold for some time in favour of other things (especially some pretty intense physiotherapy for my recovering leg). I picked up the project some weeks later.</p>
+<br/>
+<ul>
+    <li>Draft a plan for adding Google Analytics to the site.</li>
+    <li>Broad scope, no consent banner. Only load in production. Implement, prompting me if there are any unanswered questions that need decisions.</li>
+    <li> <i>[ Secrets etc removed ]</i></li>
+    <li>Main production hostname: kittylyst.com</li>
+    <li>Add the www domain as well</li>
+</ul>
+<p>This part was uneventful, except for a lack of clarity around the need to handle secrets carefully. Once again, I found myself wondering "how well would a less-experienced dev who wasn't conscious of this aspect cope here?" </p>
+<ul>
+    <li>New task: Add RSS feed.</li>
+    <li>Automate regeneration</li>
+    <li>Hook into Maven</li>
+</ul>
+<p><i>[ At this point, the LLM introduced a basic Python script with very basic templating, which was exec'd from Maven ]</i></p>
+<p>Significant manual intervention was required here - a quick bit of research showed me that Roq has simple,
+    builtin support for RSS, but the LLM did not use it - whether due to corpus limitations or some other factor. Instead,
+    it wrote a very simple Python script and shelled out to it from Maven.</p>
+<br/>
+<p>This is a good example of the antipattern sometimes called <i>Patchwork (or Stovepipe)</i>, which LLMs seem particularly prone to - where it will shoehorn in simple code that it has encountered in its corpus regardless of the overall system architecture (even when the code from the corpus is in an entirely different language).</p>
+<p>This lack of architectural thinking is another, fairly major issue that I've observed when using LLMs regularly. Even relatively straightforward refactoring tasks, such as introducing algebraic data types (records and sealed types) to older Java codebases are ignored. The problem seems particularly acute when it comes to newer language features.</p>
+<p>I don't find this surprising - LLMs are probabilistic text extruders and so a smaller extant corpus is going to be less well-represented and weighted-towards. New features such as <a href="https://developer.ibm.com/articles/j-ffm/" target="_blank">Java's FFM</a> will be at an initial disadvantage compared to the APIs that they are intended to replace (in this case, JNI).</p>
+<p>Some people have even argued that this essentially means that any new programming language that tries to launch now will encounter a death spiral because the lack of original material to build a corpus. Based on what I've seen, I think this rather overstates the case, as the LLMs do still seem to cope on small corpus sizes (the total Roq / Qute corpus size cannot be very large, for example), although they tend to closely reproduce the examples they have ingested.</p>
+<p>What do see as a problem for future languages is the introduction of new semantics that don't have analogues in other languages that might be better-represented in the model corpus. I notice that Cursor struggles more with Rust than it does with Java, seemingly due to the borrow semantics (at least in part). I wonder how well a hypothetical future language with a semantically-novel featureset will fare in an LLM-assisted world.</p>
+<p>I'm continuing to use my toolset and seeing what I can do with it across a range of my dev tasks. There are some more posts coming about other explorations, but right now my conclusions are that, given the time it's taken me to get to know the tools and how to use them effectively, and the current cost ($240 / year) then this has been worthwhile. However, if the tool cost was to <a href="https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/" target="_blank">significantly rise</a>, or the time investment changes from being a 1-off to an ongoing retraining because of instability in the tools and development practice, then this calculation could .</p>
+<p>I find myself agreeing fairly solidly with <a href="https://www.linkedin.com/posts/simonwardley_x-do-you-think-ai-will-replace-software-share-7443994710555279360-iRzR" target="_blank">Simon's take</a> - and the true picture will not become clear for a long while yet. Regardless of the claims of the boosters, the ultimate effects of AI on software will be visible on a timescale of years or decades, not months.</p>
