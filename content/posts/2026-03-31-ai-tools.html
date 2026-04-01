@@ -12,7 +12,8 @@ author: kittylyst
 draft: true
 ---
 
-<p>This post is intended primarily as an experience report on my use of AI tools - both to build this site and more
+<p>This post is a followup to my <a href="/posts/how-i-built-this-site/">initial description of how I built this site</a>.
+    It is intended primarily as an experience report on my use of AI tools - both to build this site and more
     generally. I have tried to approach my usage of them in a balanced fashion - recognizing that with their increased
     popularity, I need some familiarity with the tools in order to provide any useful critique. However, I remain deeply
     unconvinced by the claims of the AI boosters and concerned by the apparent resource consumption involved.</p>
@@ -135,5 +136,12 @@ draft: true
 <p>I don't find this surprising - LLMs are probabilistic text extruders and so a smaller extant corpus is going to be less well-represented and weighted-towards. New features such as <a href="https://developer.ibm.com/articles/j-ffm/" target="_blank">Java's FFM</a> will be at an initial disadvantage compared to the APIs that they are intended to replace (in this case, JNI).</p>
 <p>Some people have even argued that this essentially means that any new programming language that tries to launch now will encounter a death spiral because the lack of original material to build a corpus. Based on what I've seen, I think this rather overstates the case, as the LLMs do still seem to cope on small corpus sizes (the total Roq / Qute corpus size cannot be very large, for example), although they tend to closely reproduce the examples they have ingested.</p>
 <p>What do see as a problem for future languages is the introduction of new semantics that don't have analogues in other languages that might be better-represented in the model corpus. I notice that Cursor struggles more with Rust than it does with Java, seemingly due to the borrow semantics (at least in part). I wonder how well a hypothetical future language with a semantically-novel featureset will fare in an LLM-assisted world.</p>
-<p>I'm continuing to use my toolset and seeing what I can do with it across a range of my dev tasks. There are some more posts coming about other explorations, but right now my conclusions are that, given the time it's taken me to get to know the tools and how to use them effectively, and the current cost ($240 / year) then this has been worthwhile. However, if the tool cost was to <a href="https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/" target="_blank">significantly rise</a>, or the time investment changes from being a 1-off to an ongoing retraining because of instability in the tools and development practice, then this calculation could .</p>
+<p>For now, I'm continuing to use my toolset and seeing what I can do with it across a range of my dev tasks. There are
+    some more posts coming about other explorations, but right now my conclusions are that, given the time it's taken me
+    to get to know the tools and how to use them effectively, and the current cost ($240 / year) then this has been
+    worthwhile. A reminder, though, that the website building task is not something I'm a specialist at - far from it.
+    Instead, this has been something which I would otherwise have outsourced to a contractor that I am now able to do
+    for myself with the assistance of the tools. However, if the tool cost was to <a href="https://www.wheresyoured.at/the-subprime-ai-crisis-is-here/" target="_blank">rise
+        significantly</a>, or the time investment to change from being a 1-off to an ongoing retraining because of
+    instability in the tools and development practice, then this calculation could well change.</p>
 <p>I find myself agreeing fairly solidly with <a href="https://www.linkedin.com/posts/simonwardley_x-do-you-think-ai-will-replace-software-share-7443994710555279360-iRzR" target="_blank">Simon's take</a> - and the true picture will not become clear for a long while yet. Regardless of the claims of the boosters, the ultimate effects of AI on software will be visible on a timescale of years or decades, not months.</p>
