@@ -22,8 +22,6 @@ jobs:
           name: site
           path: target/roq
           retention-days: 3
-        env:
-          SITE_URL: https://kittylyst.com/
   deploy:
     runs-on: ubuntu-latest
     needs: build
