@@ -3,7 +3,6 @@ FROM registry.access.redhat.com/ubi9/openjdk-25:latest AS build
 USER root
 ENV LANGUAGE='en_US:en'
 
-RUN microdnf install procps-ng
 WORKDIR /deployments
 # We make four distinct layers so if there are application changes the library layers can be re-used
 COPY --chown=185 quarkus-app/lib/ /deployments/lib/
