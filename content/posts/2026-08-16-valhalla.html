@@ -1,0 +1,70 @@
+---
+title: A First Drink In Valhalla
+description: Java
+image: posts/library-book-stacks.jpg
+layout: post
+pubdate: 2026-08-16
+tags:
+  - java
+  - jvm
+  - hardware
+author: kittylyst
+draft: false
+---
+
+<p><a href="https://openjdk.org/projects/valhalla/" target="_blank">Project Valhalla</a> has been an in-development
+    OpenJDK project for many years now. It is probably the most ambitious project ever conducted within OpenJDK.
+    The tagline is deceptively modest: "To align JVM memory layout behavior with the cost model of modern hardware."
+    However, Valhalla touches the innermost workings of the Java data model - it is effectively open-heart
+    surgery on the JVM.</p>
+<p>In currently extant versions of Java there are two separate kinds of data - primitives, which are bit patterns that represent
+    int, long, boolean, etc - and reference types, which are pointers that target specific memory locations in the Java
+    heap and are required to point at the start of a Java object header (which is mandatory for all objects).</p>
+<p>One consequence of this is that the primitives do not have any form of <i>identity</i> - one bit pattern representing
+    the number 42 is indistinguishable from another bit pattern that also represents 42. However, it is entirely possible
+    for two references to point at different memory locations that contain objects that have all their fields equal -
+    and despite this field-equality, in the Java memory model, these are considered separate objects with different
+    identities.</p>
+<p>Valhalla's starting position is - "What if there was a new kind of data - one which represented composite or
+    user-defined data types, but which did not have identity?" This seemingly-simple idea cuts to the deepest level of
+    the Java platform. Implementing it requires changes to the virtual machine, libraries, language and everything above it.</p>
+<p> Some of the most immediate consequences are that such objects can avoid paying the overhead of a header and that
+    the defining <i>value class</i> must be final, so that all targets for method calls can be known at class loading time.
+    Example use cases for value classes include:</p>
+<ul>
+    <li>New kinds of primitives, such as unsigned bytes, 128-bit integers, and 16-bit floats</li>
+    <li>Complex numbers, quaternions, colours and 3-d vectors</li>
+    <li>Numbers with units: sizes, temperatures, cashflow amounts</li>
+    <li>Immutable cursors, subarrays, intermediate streams, and other data structure view abstractions</li>
+</ul>
+<p>It is also possible that some existing JDK types could be retrofitted and evolve to become represented as value
+    classes. For example, Optional and much of java.time are obvious candidates that would be a good fit to become
+    value classes. Additionally, although records are not, per se, related to value classes, it is very likely that many
+    record classes will be aggregates that do not require identity, so <i>value records</i> may well become a very useful and
+    common pattern.</p>
+<p>Going even further, Valhalla opens the possibility that the Java language designers can use this singular opportunity
+    to undertake work that was previously believed to be intractable (or even impossible) - such as revisiting generics,
+    closing the language syntax gap between primitives and objects, and adding nullability markers to the type system.</p>
+<p>Much can (and, indeed, has been) written about Valhalla - but in this post I want to focus on the practicalities: The
+    first pieces of Valhalla have, at long last, <a href="https://mail.openjdk.org/archives/list/jdk-dev@openjdk.org/message/NN3FIR6BULP3GE5R34B6IBO5VQKAPNMZ/" target="_blank">landed
+        on OpenJDK</a> main as Preview Features. This is a huge milestone, reflecting vast amounts of work by the OpenJDK
+        developers at Oracle - and other companies - and it opens the door for testing to be done by a much wider group
+        of Java developers than previously.</p>
+<p>As of right now, I've been trying out the <a href="https://adoptium.net/en-GB/temurin/nightly" target="_blank">Adoptium
+    nightly builds</a> for JDK 28, which support value types and have a few  observations that I've distilled from my
+    attempts to build various OSS projects (e.g. Quarkus, Hibernate):</p>
+<ul>
+    <li>Core Maven 3.9.9 seems to work fine with 28 EA.</li>
+    <li>Gradle 9.7.0 (latest) does not support JDKs beyond 26 yet. Gradle projects just will not build yet.</li>
+    <li>Kotlin projects that utilize the kapt annotation processor do not work. Each JDK release seems to affect the
+        access to javac internals that kapt requires. Kotlin 2.5.0 (est. release date: Dec 2026) will hopefully
+        introduce a new mode for this annotation processor that does not require internals access. Thanks to Ilmir
+        Usmanov & Anton Arhipov @ JetBrains for helping track this failure down.</li>
+    <li>Additionally, Kotlin does not support -ea suffix on Java version numbers, and will not work with JDK builds that
+        don't report a production Java version number.</li>
+    <li>ASM does not support Java 28 yet. Support is being discussed <a href="https://gitlab.ow2.org/asm/asm/-/work_items/318046" target="_blank">here</a>
+     and I note that Remi Forax is actively engaged there.</li>
+</ul>
+<p>As these issues are resolved, or betas are made available that address them, then we should as a community be able to
+    enable a much broader set of testing and possible failures. I'm going to start with the suggestion of building an
+    ASM jar from the current branch Remi indicated. Watch this space for updates.</p>
