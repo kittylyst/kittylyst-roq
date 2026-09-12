@@ -37,9 +37,12 @@ draft: false
     <li>Numbers with units: sizes, temperatures, cashflow amounts</li>
     <li>Immutable cursors, subarrays, intermediate streams, and other data structure view abstractions</li>
 </ul>
-<p>It is also possible that some existing JDK types could be retrofitted and evolve to become represented as value
-    classes. For example, Optional and much of java.time are obvious candidates that would be a good fit to become
-    value classes. Additionally, although records are not, per se, related to value classes, it is very likely that many
+<p>It has long been a goal that some existing JDK types could be retrofitted and evolve to become represented as value
+    classes. As of JDK 28 EA, 30 classes have been migrated to be value types (provided the --enable-preview flag
+    is set) - this includes the wrapper classes (Integer, Long, Float, Double, Byte, Short, Character and Boolean) as
+    well as Optional and its primitive variants and LocalDate, LocalTime, LocalDateTime, ZonedDateTime and Duration
+    from java.time</p>
+<p>Additionally, although records are not, per se, related to value classes, it is very likely that many
     record classes will be aggregates that do not require identity, so <i>value records</i> may well become a very useful and
     common pattern.</p>
 <p>Going even further, Valhalla opens the possibility that the Java language designers can use this singular opportunity
