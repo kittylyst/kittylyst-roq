@@ -258,8 +258,41 @@ All parameters are exposed as sliders + number inputs that update the graph in r
 |---|---|---|
 | Stage 1 | System 1 only — scaffold, data generator, D3 chart, zoom/pan, controls | ✅ done |
 | Stage 2 | System 2 added — second overlaid line, independent controls, legend | ✅ done |
-| Stage 3 | Coupling logic — one system's state influences the other | pending |
+| Stage 3 | Coupling logic — System 2 is trigger-driven by System 1 crashes | ✅ done |
 | Stage 4 | Additional visual/interaction features | pending |
+
+### Stage 3 — Coupling Design
+
+System 2 has no independent periodicity. It is entirely driven by System 1 crash events.
+
+**Coupling rules:**
+- Every System 1 crash fires a trigger that arrives at System 2 after a configurable **coupling delay** (default 0, range 0–5).
+- On trigger arrival, System 2 starts a rise immediately from its **current value** (not from zero).
+- The rise adds `+riseHeight` from that starting level over `riseDuration2`.
+- At the peak, an instantaneous crash drops by `2 × riseHeight` (crash bottom = peak − 2 × riseHeight).
+- System 2 then recovers linearly to 0 over `recoverDuration2`.
+- If a new trigger arrives mid-rise or mid-recover, the new rise begins immediately from the current interpolated level — peaks accumulate (resonance).
+- Clipping is deferred to a later stage.
+
+**System 2 parameters (Stage 3):**
+
+| Parameter | Description | Default | Range |
+|---|---|---|---|
+| `riseHeight` (amplitude) | Height added per trigger rise | 1 | 0.1–5 |
+| `riseDuration` | Duration of each triggered rise | 2 | 0.1–10 |
+| `recoverDuration` | Duration of recovery back to 0 | 2 | 0.1–10 |
+
+`restDuration` is removed — System 2 rests implicitly between triggers.
+
+**Coupling parameter:**
+
+| Parameter | Description | Default | Range |
+|---|---|---|---|
+| `couplingDelay` | Time lag between a System 1 crash and the System 2 trigger | 0 | 0–5 |
+
+The coupling delay control lives in a dedicated "Coupling" panel between the System 1 and System 2 panels.
+
+**Y-axis:** domain is computed from the actual min/max of generated data across both systems (with 20% padding), so resonant peaks that exceed the nominal amplitude remain (partially) visible.
 
 ---
 

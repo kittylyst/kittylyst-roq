@@ -204,6 +204,18 @@
       </div>
     </div>
 
+    <!-- Coupling -->
+    <div class="control-panel">
+      <div class="panel-header">Coupling</div>
+      <div class="control-group">
+        <label for="coupling-delay-slider">Coupling delay</label>
+        <div class="control-row">
+          <input type="range" id="coupling-delay-slider" min="0" max="5" step="0.1" value="0" />
+          <input type="number"  id="coupling-delay-num"   min="0" max="5" step="0.1" value="0" />
+        </div>
+      </div>
+    </div>
+
     <!-- System 2 -->
     <div class="control-panel">
       <div class="panel-header">
@@ -211,17 +223,10 @@
         System 2
       </div>
       <div class="control-group">
-        <label for="s2-amplitude-slider">Amplitude</label>
+        <label for="s2-amplitude-slider">Rise height per trigger</label>
         <div class="control-row">
           <input type="range" id="s2-amplitude-slider" min="0.1" max="5" step="0.1" value="1" />
           <input type="number"  id="s2-amplitude-num"   min="0.1" max="5" step="0.1" value="1" />
-        </div>
-      </div>
-      <div class="control-group">
-        <label for="s2-rest-slider">Rest Duration</label>
-        <div class="control-row">
-          <input type="range" id="s2-rest-slider" min="0.1" max="10" step="0.1" value="1" />
-          <input type="number"  id="s2-rest-num"   min="0.1" max="10" step="0.1" value="1" />
         </div>
       </div>
       <div class="control-group">
@@ -251,7 +256,7 @@
       </span>
       <span class="legend-item">
         <svg width="24" height="10"><line x1="0" y1="5" x2="24" y2="5" stroke="#e6882a" stroke-width="2"/></svg>
-        System 2
+        System 2 (triggered)
       </span>
     </div>
     <button id="reset-btn">Reset Zoom</button>
