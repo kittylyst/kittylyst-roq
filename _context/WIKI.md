@@ -222,7 +222,11 @@ Thumbnails in `public/images/posts/` are from Wikimedia Commons (Creative Common
 
 A standalone, browser-viewable D3.js XY line graph that visualizes a **coupled oscillator system** over time. No build step required — open `viz/index.html` directly in a browser.
 
-### Waveform — System 1
+Both systems use the same four-phase waveform shape with independent parameters, rendered as two overlaid coloured lines on one chart. System 1 is blue (`#3b82d4`); System 2 is orange (`#e6882a`). A colour legend appears below the chart. Controls are presented as two side-by-side panels.
+
+The time window always shows **6 full cycles of System 1**; System 2 renders however many cycles fit in that window.
+
+### Waveform Shape (both systems)
 
 One cycle consists of four sequential phases:
 
@@ -237,33 +241,25 @@ One cycle consists of four sequential phases:
 
 ### Configurable Parameters
 
-| Parameter | Description |
-|---|---|
-| `amplitude` | Peak height (crash depth = amplitude) |
-| `restDuration` | Duration of the flat-at-zero phase |
-| `riseDuration` | Duration of the linear rise phase |
-| `recoverDuration` | Duration of the linear recovery phase |
+Each system has four independent parameters:
 
-Default values: `amplitude=1`, `restDuration=2`, `riseDuration=3`, `recoverDuration=1` (arbitrary time units).
-Total time window = `(restDuration + riseDuration + recoverDuration) × 6`.
+| Parameter | Description | System 1 default | System 2 default |
+|---|---|---|---|
+| `amplitude` | Peak height (crash depth = amplitude) | 1 | 1 |
+| `restDuration` | Duration of the flat-at-zero phase | 2 | 1 |
+| `riseDuration` | Duration of the linear rise phase | 3 | 2 |
+| `recoverDuration` | Duration of the linear recovery phase | 1 | 2 |
 
 All parameters are exposed as sliders + number inputs that update the graph in real time.
 
-### Implementation Plan (Stage 1)
+### Implementation Status
 
-| Sub-task | Description | Status |
+| Stage | Description | Status |
 |---|---|---|
-| 1 — Scaffold | `viz/index.html` + `viz/viz.js` stub, D3 from CDN | pending |
-| 2 — Data generator | Pure `generateSystem1(params, totalTime)` → `[{t, v}]` | pending |
-| 3 — D3 rendering | SVG line chart with labelled X/Y axes | pending |
-| 4 — Pan & zoom | X-axis only zoom/pan via `d3.zoom()`, clip path, Reset button | pending |
-| 5 — Controls UI | Four label + slider + number-input groups, bidirectionally synced | pending |
-
-### Future Stages (out of scope)
-
-- **Stage 2**: Add System 2 with its own waveform and parameters
-- **Stage 3**: Coupling logic — one system's state influences the other
-- **Stage 4**: Visual differentiation (colours, legend, per-system toggle)
+| Stage 1 | System 1 only — scaffold, data generator, D3 chart, zoom/pan, controls | ✅ done |
+| Stage 2 | System 2 added — second overlaid line, independent controls, legend | ✅ done |
+| Stage 3 | Coupling logic — one system's state influences the other | pending |
+| Stage 4 | Additional visual/interaction features | pending |
 
 ---
 

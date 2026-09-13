@@ -27,23 +27,49 @@
 
     #controls {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
-      gap: 16px 32px;
+      gap: 16px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .control-panel {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       background: #ffffff;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
       padding: 16px 20px;
-      margin-bottom: 20px;
-      width: 100%;
-      max-width: 860px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1f2328;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .panel-header .swatch {
+      display: inline-block;
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
     }
 
     .control-group {
       display: flex;
       flex-direction: column;
       gap: 4px;
-      min-width: 180px;
-      flex: 1;
     }
 
     .control-group label {
@@ -110,9 +136,26 @@
     .axis-label { font-size: 12px; fill: #57606a; }
     .waveform-line {
       fill: none;
-      stroke: #3b82d4;
       stroke-width: 2;
     }
+    .system1-line { stroke: #3b82d4; }
+    .system2-line { stroke: #e6882a; }
+    #legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0 4px;
+      font-size: 0.82rem;
+      color: #57606a;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .zero-line {
       stroke: #e5e7eb;
       stroke-width: 1;
@@ -121,44 +164,96 @@
   </style>
 </head>
 <body>
-  <h1>Coupled System — System 1</h1>
+  <h1>Coupled System Visualization</h1>
 
   <div id="controls">
-    <div class="control-group">
-      <label for="amplitude">Amplitude</label>
-      <div class="control-row">
-        <input type="range" id="amplitude-slider" min="0.1" max="5" step="0.1" value="1" />
-        <input type="number"  id="amplitude-num"   min="0.1" max="5" step="0.1" value="1" />
+
+    <!-- System 1 -->
+    <div class="control-panel">
+      <div class="panel-header">
+        <span class="swatch" style="background:#3b82d4;"></span>
+        System 1
+      </div>
+      <div class="control-group">
+        <label for="amplitude-slider">Amplitude</label>
+        <div class="control-row">
+          <input type="range" id="amplitude-slider" min="0.1" max="5" step="0.1" value="1" />
+          <input type="number"  id="amplitude-num"   min="0.1" max="5" step="0.1" value="1" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="rest-slider">Rest Duration</label>
+        <div class="control-row">
+          <input type="range" id="rest-slider" min="0.1" max="10" step="0.1" value="2" />
+          <input type="number"  id="rest-num"   min="0.1" max="10" step="0.1" value="2" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="rise-slider">Rise Duration</label>
+        <div class="control-row">
+          <input type="range" id="rise-slider" min="0.1" max="10" step="0.1" value="3" />
+          <input type="number"  id="rise-num"   min="0.1" max="10" step="0.1" value="3" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="recover-slider">Recover Duration</label>
+        <div class="control-row">
+          <input type="range" id="recover-slider" min="0.1" max="10" step="0.1" value="1" />
+          <input type="number"  id="recover-num"   min="0.1" max="10" step="0.1" value="1" />
+        </div>
       </div>
     </div>
 
-    <div class="control-group">
-      <label for="rest-duration">Rest Duration</label>
-      <div class="control-row">
-        <input type="range" id="rest-slider" min="0.1" max="10" step="0.1" value="2" />
-        <input type="number"  id="rest-num"   min="0.1" max="10" step="0.1" value="2" />
+    <!-- System 2 -->
+    <div class="control-panel">
+      <div class="panel-header">
+        <span class="swatch" style="background:#e6882a;"></span>
+        System 2
+      </div>
+      <div class="control-group">
+        <label for="s2-amplitude-slider">Amplitude</label>
+        <div class="control-row">
+          <input type="range" id="s2-amplitude-slider" min="0.1" max="5" step="0.1" value="1" />
+          <input type="number"  id="s2-amplitude-num"   min="0.1" max="5" step="0.1" value="1" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="s2-rest-slider">Rest Duration</label>
+        <div class="control-row">
+          <input type="range" id="s2-rest-slider" min="0.1" max="10" step="0.1" value="1" />
+          <input type="number"  id="s2-rest-num"   min="0.1" max="10" step="0.1" value="1" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="s2-rise-slider">Rise Duration</label>
+        <div class="control-row">
+          <input type="range" id="s2-rise-slider" min="0.1" max="10" step="0.1" value="2" />
+          <input type="number"  id="s2-rise-num"   min="0.1" max="10" step="0.1" value="2" />
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="s2-recover-slider">Recover Duration</label>
+        <div class="control-row">
+          <input type="range" id="s2-recover-slider" min="0.1" max="10" step="0.1" value="2" />
+          <input type="number"  id="s2-recover-num"   min="0.1" max="10" step="0.1" value="2" />
+        </div>
       </div>
     </div>
 
-    <div class="control-group">
-      <label for="rise-duration">Rise Duration</label>
-      <div class="control-row">
-        <input type="range" id="rise-slider" min="0.1" max="10" step="0.1" value="3" />
-        <input type="number"  id="rise-num"   min="0.1" max="10" step="0.1" value="3" />
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label for="recover-duration">Recover Duration</label>
-      <div class="control-row">
-        <input type="range" id="recover-slider" min="0.1" max="10" step="0.1" value="1" />
-        <input type="number"  id="recover-num"   min="0.1" max="10" step="0.1" value="1" />
-      </div>
-    </div>
   </div>
 
   <div id="chart-container">
     <div id="chart"></div>
+    <div id="legend">
+      <span class="legend-item">
+        <svg width="24" height="10"><line x1="0" y1="5" x2="24" y2="5" stroke="#3b82d4" stroke-width="2"/></svg>
+        System 1
+      </span>
+      <span class="legend-item">
+        <svg width="24" height="10"><line x1="0" y1="5" x2="24" y2="5" stroke="#e6882a" stroke-width="2"/></svg>
+        System 2
+      </span>
+    </div>
     <button id="reset-btn">Reset Zoom</button>
   </div>
 

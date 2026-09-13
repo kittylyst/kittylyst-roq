@@ -1,7 +1,7 @@
 // ─── Waveform data generator ────────────────────────────────────────────────
 
 /**
- * Generate (t, v) points for System 1.
+ * Generate (t, v) points for a coupled-system waveform.
  *
  * One cycle has four phases:
  *   1. Rest     – flat at 0 for restDuration
@@ -17,7 +17,7 @@
  * @param {number} totalTime
  * @returns {{ t: number, v: number }[]}
  */
-function generateSystem1(params, totalTime) {
+function generateWaveform(params, totalTime) {
   const { amplitude, restDuration, riseDuration, recoverDuration } = params;
   const cycleLength = restDuration + riseDuration + recoverDuration;
   const points = [];
@@ -120,15 +120,18 @@ g.append('text')
   .attr('y', -40)
   .text('Value');
 
-// Waveform path (clipped)
-const linePath = g.append('g')
-  .attr('clip-path', `url(#${clipId})`)
-  .append('path')
-    .attr('class', 'waveform-line');
+// Waveform paths (clipped)
+const clipGroup = g.append('g').attr('clip-path', `url(#${clipId})`);
+
+const linePath = clipGroup.append('path')
+    .attr('class', 'waveform-line system1-line');
+
+const linePath2 = clipGroup.append('path')
+    .attr('class', 'waveform-line system2-line');
 
 // Scales (mutable refs updated on render)
-let xScale = d3.scaleLinear();
-let yScale = d3.scaleLinear();
+let xScale  = d3.scaleLinear();
+let yScale  = d3.scaleLinear();
 
 // The base (un-zoomed) x scale — updated on data change, referenced by zoom
 let xScaleBase = d3.scaleLinear();
@@ -157,11 +160,13 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
 // ─── Render logic ────────────────────────────────────────────────────────────
 
-let currentData = [];
+let currentData  = [];
+let currentData2 = [];
 
 function redrawAxesAndLine() {
   xAxisG.call(d3.axisBottom(xScale).ticks(8).tickSizeOuter(0));
   linePath.attr('d', lineGen(currentData));
+  linePath2.attr('d', lineGen(currentData2));
 
   // Keep zero line in sync with current x extent
   const [x0, x1] = xScale.range();
@@ -169,16 +174,18 @@ function redrawAxesAndLine() {
   zeroLine.attr('x1', x0).attr('x2', x1).attr('y1', y0).attr('y2', y0);
 }
 
-function render(params) {
-  const cycleLength = params.restDuration + params.riseDuration + params.recoverDuration;
+function render(params1, params2) {
+  const cycleLength = params1.restDuration + params1.riseDuration + params1.recoverDuration;
   const totalTime   = cycleLength * 6;
 
-  currentData = generateSystem1(params, totalTime);
+  currentData  = generateWaveform(params1, totalTime);
+  currentData2 = generateWaveform(params2, totalTime);
 
-  // Y scale: symmetric around 0, padded 20%
-  const pad = params.amplitude * 0.2;
+  // Y scale: symmetric around 0, padded 20% — spans both systems' amplitudes
+  const maxAmp = Math.max(params1.amplitude, params2.amplitude);
+  const pad = maxAmp * 0.2;
   yScale = d3.scaleLinear()
-    .domain([-params.amplitude - pad, params.amplitude + pad])
+    .domain([-maxAmp - pad, maxAmp + pad])
     .range([HEIGHT, 0]);
 
   // X base scale
@@ -200,9 +207,10 @@ function render(params) {
   const y0 = yScale(0);
   zeroLine.attr('x1', 0).attr('x2', chartWidth()).attr('y1', y0).attr('y2', y0);
 
-  // Line path
+  // Line paths
   xScale = xScaleBase;
   linePath.attr('d', lineGen(currentData));
+  linePath2.attr('d', lineGen(currentData2));
 }
 
 // ─── Controls wiring ─────────────────────────────────────────────────────────
@@ -216,28 +224,44 @@ function readParams() {
   };
 }
 
+function readParams2() {
+  return {
+    amplitude:       +document.getElementById('s2-amplitude-num').value,
+    restDuration:    +document.getElementById('s2-rest-num').value,
+    riseDuration:    +document.getElementById('s2-rise-num').value,
+    recoverDuration: +document.getElementById('s2-recover-num').value,
+  };
+}
+
 function wireControl(sliderId, numId) {
   const slider = document.getElementById(sliderId);
   const num    = document.getElementById(numId);
 
   slider.addEventListener('input', () => {
     num.value = slider.value;
-    render(readParams());
+    render(readParams(), readParams2());
   });
 
   num.addEventListener('input', () => {
     slider.value = num.value;
-    render(readParams());
+    render(readParams(), readParams2());
   });
 }
 
+// System 1 controls
 wireControl('amplitude-slider', 'amplitude-num');
 wireControl('rest-slider',      'rest-num');
 wireControl('rise-slider',      'rise-num');
 wireControl('recover-slider',   'recover-num');
 
+// System 2 controls
+wireControl('s2-amplitude-slider', 's2-amplitude-num');
+wireControl('s2-rest-slider',      's2-rest-num');
+wireControl('s2-rise-slider',      's2-rise-num');
+wireControl('s2-recover-slider',   's2-recover-num');
+
 // ─── Initial render ──────────────────────────────────────────────────────────
 
-render(readParams());
+render(readParams(), readParams2());
 
 console.log('coupled-system viz ready');
