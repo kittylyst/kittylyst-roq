@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coupled System Visualization</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: #f7f8fa;
+      color: #1f2328;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1f2328;
+    }
+
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 180px;
+      flex: 1;
+    }
+
+    .control-group label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #57606a;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-row input[type="range"] {
+      flex: 1;
+      accent-color: #3b82d4;
+    }
+
+    .control-row input[type="number"] {
+      width: 60px;
+      padding: 2px 6px;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #1f2328;
+      background: #f7f8fa;
+    }
+
+    #chart-container {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 860px;
+      overflow: hidden;
+    }
+
+    #chart {
+      width: 100%;
+    }
+
+    #reset-btn {
+      display: block;
+      margin: 12px auto 0;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      background: #f7f8fa;
+      color: #57606a;
+      cursor: pointer;
+    }
+
+    #reset-btn:hover {
+      background: #e5e7eb;
+      color: #1f2328;
+    }
+
+    .axis text { font-size: 11px; fill: #57606a; }
+    .axis line, .axis path { stroke: #e5e7eb; }
+    .axis-label { font-size: 12px; fill: #57606a; }
+    .waveform-line {
+      fill: none;
+      stroke: #3b82d4;
+      stroke-width: 2;
+    }
+    .zero-line {
+      stroke: #e5e7eb;
+      stroke-width: 1;
+      stroke-dasharray: 4 3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Coupled System — System 1</h1>
+
+  <div id="controls">
+    <div class="control-group">
+      <label for="amplitude">Amplitude</label>
+      <div class="control-row">
+        <input type="range" id="amplitude-slider" min="0.1" max="5" step="0.1" value="1" />
+        <input type="number"  id="amplitude-num"   min="0.1" max="5" step="0.1" value="1" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="rest-duration">Rest Duration</label>
+      <div class="control-row">
+        <input type="range" id="rest-slider" min="0.1" max="10" step="0.1" value="2" />
+        <input type="number"  id="rest-num"   min="0.1" max="10" step="0.1" value="2" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="rise-duration">Rise Duration</label>
+      <div class="control-row">
+        <input type="range" id="rise-slider" min="0.1" max="10" step="0.1" value="3" />
+        <input type="number"  id="rise-num"   min="0.1" max="10" step="0.1" value="3" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="recover-duration">Recover Duration</label>
+      <div class="control-row">
+        <input type="range" id="recover-slider" min="0.1" max="10" step="0.1" value="1" />
+        <input type="number"  id="recover-num"   min="0.1" max="10" step="0.1" value="1" />
+      </div>
+    </div>
+  </div>
+
+  <div id="chart-container">
+    <div id="chart"></div>
+    <button id="reset-btn">Reset Zoom</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="viz.js"></script>
+</body>
+</html>

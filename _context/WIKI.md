@@ -205,6 +205,68 @@ Create `content/upcoming/YYYY-MM-DD-slug.html` with `published: true` and a `pub
 
 ---
 
+## Blog Post Image Credits
+
+Thumbnails in `public/images/posts/` are from Wikimedia Commons (Creative Commons / public domain), downloaded by `scripts/download-blog-images-cc.py`.
+
+| File | Description | Licence |
+|---|---|---|
+| `typewriter-keyboard.jpg` | Typewriter keyboard, by Maksym Kozlenko | CC BY-SA 4.0 |
+| `cryptocurrency-logos.jpg` | Cryptocurrency logos | CC0 |
+| `programming-code.jpg` | Programming (code on screen), Lorenzo Cafaro / Pixabay | CC0 |
+| `library-book-stacks.jpg` | Library book stacks, Gwyneth Perry | CC0 |
+
+---
+
+## Coupled-System Visualization (`viz/`)
+
+A standalone, browser-viewable D3.js XY line graph that visualizes a **coupled oscillator system** over time. No build step required — open `viz/index.html` directly in a browser.
+
+### Waveform — System 1
+
+One cycle consists of four sequential phases:
+
+| Phase | Behaviour |
+|---|---|
+| **Rest** | Signal sits flat at `0` for a configurable duration |
+| **Rise** | Signal ramps linearly up to `+amplitude` over a configurable duration |
+| **Crash** | Signal drops instantaneously to `−amplitude` (represented as two points at the same `t`, producing a vertical line in D3) |
+| **Recover** | Signal ramps linearly back to `0` over a configurable duration |
+
+`amplitude` is shared between the positive peak and the negative crash (always symmetrical). The default time window shows at least **6 full cycles**.
+
+### Configurable Parameters
+
+| Parameter | Description |
+|---|---|
+| `amplitude` | Peak height (crash depth = amplitude) |
+| `restDuration` | Duration of the flat-at-zero phase |
+| `riseDuration` | Duration of the linear rise phase |
+| `recoverDuration` | Duration of the linear recovery phase |
+
+Default values: `amplitude=1`, `restDuration=2`, `riseDuration=3`, `recoverDuration=1` (arbitrary time units).
+Total time window = `(restDuration + riseDuration + recoverDuration) × 6`.
+
+All parameters are exposed as sliders + number inputs that update the graph in real time.
+
+### Implementation Plan (Stage 1)
+
+| Sub-task | Description | Status |
+|---|---|---|
+| 1 — Scaffold | `viz/index.html` + `viz/viz.js` stub, D3 from CDN | pending |
+| 2 — Data generator | Pure `generateSystem1(params, totalTime)` → `[{t, v}]` | pending |
+| 3 — D3 rendering | SVG line chart with labelled X/Y axes | pending |
+| 4 — Pan & zoom | X-axis only zoom/pan via `d3.zoom()`, clip path, Reset button | pending |
+| 5 — Controls UI | Four label + slider + number-input groups, bidirectionally synced | pending |
+
+### Future Stages (out of scope)
+
+- **Stage 2**: Add System 2 with its own waveform and parameters
+- **Stage 3**: Coupling logic — one system's state influences the other
+- **Stage 4**: Visual differentiation (colours, legend, per-system toggle)
+
+---
+
 ## History
 
 This site is a rewrite of an older **Gatsby 5** (React/Node.js) site. The migration involved:
