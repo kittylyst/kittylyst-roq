@@ -1,0 +1,37 @@
+---
+title: Java4Shell
+description: A quick note on Java4Shell
+image: posts/link1.jpg
+layout: post
+pubdate: 2026-11-23
+tags:
+  - java
+author: kittylyst
+draft: false
+---
+
+<p>A quick note on the “Java4Shell” vulnerability (there are a few extra Quarkus-specific details on the <a href="https://quarkus.io/blog/java4shell/">Quarkus blog</a>).</p>
+<ol class="list-disc">
+    <li>Only x64 is vulnerable, ARM is not affected.</li>
+    <li>The bug is in the HotSpot JVM’s JIT compiler - a compiler
+    intrinsic that is used to speed up Base64 operations has an overflow
+        issue.</li>
+    <li>A single extra JVM switch (-XX:-UseBASE64Intrinsics) will do the
+    job of fully protecting, even on AVX-512 capable x64 machine. Best
+        practice is to update as soon as a fixed JDK is available.</li>
+    <li>The Hotspot bug, by itself, does NOT grant RCE, only Java heap
+    corruption. The JVM cannot be made to directly execute any data payload within
+        the Java heap, so it must be combined with additional techniques.</li>
+    <li>I am highly skeptical about the RCE being real-world practical at all. I know
+    enough about the internals of a couple of Java application containers
+    to make educated guesses about what you would have to combine this
+    with to get to RCE, but it’s not obviously generalizable. Java heap
+    corruption - yes, definitely. RCE - highly questionable.
+    Heartbleed-style read: Potentially easier than RCE, but still
+    app-specific and highly statistical in nature due to GC relocation
+        issues.</li>
+</ol>
+<p>So, my take away is that it needs to get patched at JDK level as soon as it's available from your Java
+   vendor, and you should include the extra JVM switch for now -- but do remember to take it out after you have
+    upgraded the JDK (and also recall that there is a small possibility of a performance regression on hot code paths
+    that perform Base64 operations, so watch out for it).</p>
